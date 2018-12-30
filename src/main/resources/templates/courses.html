@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <td>Publisher</td>
+        <td>Year of publication</td>
+        <td>ISBN</td>
+        <td>ISBN</td>
+        <td>ISBN</td>
+        <td>ISBN</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="course: ${courses}">
+        <td th:text="${course.startTime}">Nowa era</td>
+        <td th:text="${course.endTime}">1997</td>
+        <td th:text="${course.venue}">495741544</td>
+        <td th:text="${course.type}">495741544</td>
+        <td th:text="${course.day.getValue()}">495741544</td>
+        <td th:text="${course.lecturer.name}">495741544</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
