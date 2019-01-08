@@ -6,7 +6,7 @@ import lombok.Setter;
 import pl.mbab.subjectdeclaration.model.subject.Course;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -19,19 +19,19 @@ public class Student {
     private String name;
     private String surname;
 
-    @Enumerated(EnumType.STRING)
-    private Sex sex;
-    private int pesel;
+//    @Enumerated(EnumType.STRING)
+//    private Gender sex;
+//    private int pesel;
 
     @Embedded
     private Address address;
 
     private int album;
 
-    @ManyToOne
-    @JoinColumn(name="field_id")
-    private Field field;
-    private int semester;
+//    @ManyToOne
+//    @JoinColumn(name="field_id")
+//    private Field field;
+//    private int semester;
     private String email;
     private String login; // inicjały + nr indeksu - klucz główny
     private String password;
@@ -40,6 +40,6 @@ public class Student {
     @ManyToMany
     @JoinTable(name = "student_basket", joinColumns = @JoinColumn(name = "student_id"),
                 inverseJoinColumns = @JoinColumn(name = "subject_id"))
-    private List<Course> courseBasket;
+    private Set<Course> courseBasket;
 
 }

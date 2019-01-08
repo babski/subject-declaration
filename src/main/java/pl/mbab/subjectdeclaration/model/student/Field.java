@@ -22,6 +22,7 @@ public class Field {
     private String name;
 
     @OneToMany(mappedBy = "field")
+    @Column(name = "field_subject_list")
     private List<FieldSubject> fieldSubjects = new ArrayList<>();
 
 }

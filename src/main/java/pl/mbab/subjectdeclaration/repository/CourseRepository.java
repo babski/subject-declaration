@@ -1,4 +1,4 @@
-package pl.mbab.subjectdeclaration.repositories;
+package pl.mbab.subjectdeclaration.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import pl.mbab.subjectdeclaration.model.subject.Course;

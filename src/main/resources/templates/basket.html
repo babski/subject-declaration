@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Basket</h1>
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Sygnatura</th>
+        <th>Przedmiot</th>
+        <th>Typ zajęć</th>
+        <th>Wykładowca</th>
+        <th>Termin</th>
+        <th>Dodaj</th>
+    </tr>
+    </thead>
+    <tbody id="myTable">
+    <tr th:each="course: ${user.courseBasket}">
+        <td th:text="${course.subject.getSignature() +'-'+ course.lecturer.getSignature()}"></td>
+        <td th:text="${course.subject.getName()}">Przedmiot</td>
+        <td th:text="${course.type.getValue()}">Typ zajęć</td>
+        <td th:text="${course.lecturer.getName()}">Wykładowca</td>
+        <td th:text="${course.day.getValue() + ' ' + course.startTime + '-' + course.endTime}">Termin</td>
+        <td th:text="${course.lecturer.name}">Dodaj</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

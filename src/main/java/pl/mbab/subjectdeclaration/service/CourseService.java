@@ -1,4 +1,4 @@
-package pl.mbab.subjectdeclaration.services;
+package pl.mbab.subjectdeclaration.service;
 
 
 
@@ -16,4 +16,5 @@ public interface CourseService {
     List<Course> findFieldCourses();
     List<Course> addCourse(Long id);
     List<Course> deleteCourse(Long id);
+    Course findCourseById(Long id);
 }

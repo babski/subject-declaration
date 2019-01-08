@@ -1,31 +1,59 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <title>Filterable table</title>
 </head>
 <body>
-<table>
-    <thead>
-    <tr>
-        <td>Publisher</td>
-        <td>Year of publication</td>
-        <td>ISBN</td>
-        <td>ISBN</td>
-        <td>ISBN</td>
-        <td>ISBN</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="course: ${courses}">
-        <td th:text="${course.startTime}">Nowa era</td>
-        <td th:text="${course.endTime}">1997</td>
-        <td th:text="${course.venue}">495741544</td>
-        <td th:text="${course.type}">495741544</td>
-        <td th:text="${course.day.getValue()}">495741544</td>
-        <td th:text="${course.lecturer.name}">495741544</td>
-    </tr>
-    </tbody>
-</table>
+<div class="container mt-3">
+    <h2>Filterable Table</h2>
+    <p>Type something in the input field to search the table for first names, last names or emails:</p>
+    <input class="form-control" id="myInput" type="text" placeholder="Search..">
+    <br>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Sygnatura</th>
+            <th>Przedmiot</th>
+            <th>Typ zajęć</th>
+            <th>Wykładowca</th>
+            <th>Termin</th>
+            <th>Dodaj</th>
+        </tr>
+        </thead>
+        <tbody id="myTable">
+        <tr th:each="course: ${courses}">
+            <td th:text="${course.subject.getSignature() +'-'+course.lecturer.getSignature()}">Sygnatura</td>
+            <td th:text="${course.subject.getName()}">Przedmiot</td>
+            <td th:text="${course.type.getValue()}">Typ zajęć</td>
+            <td th:text="${course.lecturer.getName()}">Wykładowca</td>
+            <td th:text="${course.day.getValue() + ' ' + course.startTime + '-' + course.endTime}">Termin</td>
+            <td> <form action="#" th:action="@{'/addcourse/'}" th:object="${course}" method="post">
+                <input type="hidden" id="courseId" name="courseId" th:value="${course.id}" />
+                <input type="submit" value="Dodaj"/>
+        </form></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>Note that we start the search in tbody, to prevent filtering the table headers.</p>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+
 </body>
 </html>
