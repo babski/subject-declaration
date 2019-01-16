@@ -7,7 +7,7 @@ public class PeselValidator implements
         ConstraintValidator<PeselConstraint, String> {
 
     @Override
-    public void initialize(PeselConstraint contactNumber) {
+    public void initialize(PeselConstraint peselNumber) {
     }
 
     @Override

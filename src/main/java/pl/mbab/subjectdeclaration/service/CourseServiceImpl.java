@@ -2,10 +2,11 @@ package pl.mbab.subjectdeclaration.service;
 
 import org.springframework.stereotype.Service;
 import pl.mbab.subjectdeclaration.model.subject.Course;
+import pl.mbab.subjectdeclaration.model.subject.CourseType;
 import pl.mbab.subjectdeclaration.repository.CourseRepository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -17,49 +18,57 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> getAllCourses() {
-        List<Course> result = new ArrayList<>();
+    public Set<Course> getAllCourses() {
+        Set<Course> result = new LinkedHashSet<>();
         courseRepository.findAll().iterator().forEachRemaining(result::add);
         return result;
     }
 
     @Override
-    public List<Course> findCourseBySignature() {
+    public Set<Course> findCourseBySignature() {
         return null;
     }
 
     @Override
-    public List<Course> findCourseByName() {
+    public Set<Course> findCourseByName() {
         return null;
     }
 
     @Override
-    public List<Course> findCourseByLecturerId() {
+    public Set<Course> findCourseByLecturerId() {
         return null;
     }
 
     @Override
-    public List<Course> findCourseByLecturerName() {
+    public Set<Course> findCourseByLecturerName() {
         return null;
     }
 
     @Override
-    public List<Course> findFieldCourses() {
+    public Set<Course> findFieldCourses() {
         return null;
     }
 
     @Override
-    public List<Course> addCourse(Long id) {
+    public Set<Course> addCourse(Long id) {
         return null;
     }
 
     @Override
-    public List<Course> deleteCourse(Long id) {
+    public Set<Course> deleteCourse(Long id) {
         return null;
     }
 
     @Override
     public Course findCourseById(Long id) {
         return courseRepository.findById(id).orElse(null);
-            }
+    }
+
+    @Override
+    public double countEcts(Set<Course> courseSet) {
+        return courseSet.stream().filter(x -> !(x.getSubject().isComplex() == true && x.getType() == CourseType.CLASSES))
+                .mapToDouble(x -> x.getSubject().getEcts()).sum();
+
+    }
+
 }

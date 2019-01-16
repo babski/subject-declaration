@@ -1,20 +1,20 @@
 package pl.mbab.subjectdeclaration.service;
 
 
-
 import pl.mbab.subjectdeclaration.model.subject.Course;
 
-import java.util.List;
+import java.util.Set;
 
 public interface CourseService {
 
-    List<Course> getAllCourses();
-    List<Course> findCourseBySignature();
-    List<Course> findCourseByName();
-    List<Course> findCourseByLecturerId();
-    List<Course> findCourseByLecturerName();
-    List<Course> findFieldCourses();
-    List<Course> addCourse(Long id);
-    List<Course> deleteCourse(Long id);
+    Set<Course> getAllCourses();
+    Set<Course> findCourseBySignature();
+    Set<Course> findCourseByName();
+    Set<Course> findCourseByLecturerId();
+    Set<Course> findCourseByLecturerName();
+    Set<Course> findFieldCourses();
+    Set<Course> addCourse(Long id);
+    Set<Course> deleteCourse(Long id);
     Course findCourseById(Long id);
+    double countEcts(Set<Course> courseSet);
 }

@@ -21,13 +21,7 @@ public class Subject {
     private String signature;
     private String name;
     private double ects;
+    private boolean complex;
 
-    public String getSignature() {
-        return signature;
-    }
-
-    public String getName() {
-        return name;
-    }
 
 }

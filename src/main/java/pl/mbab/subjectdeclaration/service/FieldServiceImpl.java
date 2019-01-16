@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 import pl.mbab.subjectdeclaration.model.student.Field;
 import pl.mbab.subjectdeclaration.repository.FieldRepository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Service
 public class FieldServiceImpl implements FieldService {
@@ -17,8 +17,8 @@ public class FieldServiceImpl implements FieldService {
     }
 
     @Override
-    public List<Field> getAllFields() {
-        List<Field> result = new ArrayList<>();
+    public Set<Field> getAllFields() {
+        Set<Field> result = new LinkedHashSet<>();
         fieldRepository.findAll().iterator().forEachRemaining(result::add);
         return result;
     }

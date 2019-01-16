@@ -10,6 +10,9 @@
     <title>Filterable table</title>
 </head>
 <body>
+<a href th:href="@{/}">Strona główna</a>
+<a href th:href="@{/courses/field1}">Dodaj kierunkowy</a>
+<a href th:href="@{/courses/field2b}">Dodaj związany z kierunkiem</a>
 <div class="container mt-3">
     <h2>Filterable Table</h2>
     <p>Type something in the input field to search the table for first names, last names or emails:</p>
@@ -37,6 +40,17 @@
                 <input type="hidden" id="courseId" name="courseId" th:value="${course.id}" />
                 <input type="submit" value="Dodaj"/>
         </form></td>
+
+            <!--<td th:if="${!course.lecturer.getSignature().equals('0000')}" th:text="${course.subject.getSignature() +'-'+course.lecturer.getSignature()}">Sygnatura</td>-->
+            <!--<td th:if="${!course.lecturer.getSignature().equals('0000')}" th:text="${course.subject.getName()}">Przedmiot</td>-->
+            <!--<td th:if="${!course.lecturer.getSignature().equals('0000')}" th:text="${course.type.getValue()}">Typ zajęć</td>-->
+            <!--<td th:if="${!course.lecturer.getSignature().equals('0000')}" th:text="${course.lecturer.getName()}">Wykładowca</td>-->
+            <!--<td th:if="${!course.lecturer.getSignature().equals('0000')}" th:text="${course.day.getValue() + ' ' + course.startTime + '-' + course.endTime}">Termin</td>-->
+            <!--<td th:if="${!course.lecturer.getSignature().equals('0000')}" > <form action="#" th:action="@{'/addcourse/'}" th:object="${course}" method="post">-->
+                <!--<input type="hidden" id="courseId" name="courseId" th:value="${course.id}" />-->
+                <!--<input type="submit" value="Dodaj"/>-->
+            <!--</form></td>-->
+
         </tr>
         </tbody>
     </table>

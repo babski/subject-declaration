@@ -2,15 +2,16 @@ package pl.mbab.subjectdeclaration.web.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 import pl.mbab.subjectdeclaration.constraint.FieldMatch;
+import pl.mbab.subjectdeclaration.constraint.PasswordConstraint;
 import pl.mbab.subjectdeclaration.constraint.PeselConstraint;
 import pl.mbab.subjectdeclaration.model.student.Field;
 import pl.mbab.subjectdeclaration.model.student.Gender;
 import pl.mbab.subjectdeclaration.model.student.Semester;
 
 import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @FieldMatch.List({
         @FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match"),
@@ -20,33 +21,30 @@ import javax.validation.constraints.AssertTrue;
 @Setter
 public class UserRegistrationDto {
 
-    @NotEmpty
+    @Size(min=3, max=30, message = "Imię powinno zawierać od 3 do 20 znaków")
     private String firstName;
 
-    @NotEmpty
+    @Size(min=3, max=30, message = "Nazwisko powinno zawierać od 3 do 20 znaków")
     private String lastName;
 
     @PeselConstraint
     private String pesel;
 
+    @NotNull(message = "Proszę wybrać płeć biologiczną")
     private Gender gender;
 
     private Semester semester;
 
     private Field field;
 
-    @NotEmpty
+    @PasswordConstraint
     private String password;
 
-    @NotEmpty
     private String confirmPassword;
 
-    @Email
-    @NotEmpty
+    @Size(min=6, message = "Email powinien zawierać przynajmniej 6 znaków")
     private String email;
 
-    @Email
-    @NotEmpty
     private String confirmEmail;
 
     @AssertTrue

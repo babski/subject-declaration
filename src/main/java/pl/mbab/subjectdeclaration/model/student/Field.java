@@ -6,8 +6,7 @@ import lombok.Setter;
 import pl.mbab.subjectdeclaration.model.subject.FieldSubject;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -23,6 +22,6 @@ public class Field {
 
     @OneToMany(mappedBy = "field")
     @Column(name = "field_subject_list")
-    private List<FieldSubject> fieldSubjects = new ArrayList<>();
+    private Set<FieldSubject> fieldSubjects;
 
 }

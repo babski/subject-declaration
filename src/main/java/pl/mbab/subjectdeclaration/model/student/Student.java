@@ -19,19 +19,12 @@ public class Student {
     private String name;
     private String surname;
 
-//    @Enumerated(EnumType.STRING)
-//    private Gender sex;
-//    private int pesel;
-
     @Embedded
     private Address address;
 
     private int album;
 
-//    @ManyToOne
-//    @JoinColumn(name="field_id")
-//    private Field field;
-//    private int semester;
+
     private String email;
     private String login; // inicjały + nr indeksu - klucz główny
     private String password;

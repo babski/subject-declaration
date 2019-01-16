@@ -6,11 +6,12 @@ import java.lang.annotation.*;
 
 
 @Documented
-@Constraint(validatedBy = PeselValidator.class)
+@Constraint(validatedBy = PasswordValidator.class)
 @Target( { ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface PeselConstraint {
-    String message() default "Nieprawidłowy numer PESEL";
+public @interface PasswordConstraint {
+    String message() default "Hasło powinno zawierać od 6 do 20 znaków w tym przynajmniej jedną wielką i " +
+            "małą literę, cyfrę oraz znak specjalny (!@#$%^&)";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

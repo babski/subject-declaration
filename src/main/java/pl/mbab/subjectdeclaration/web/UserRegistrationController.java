@@ -15,7 +15,7 @@ import pl.mbab.subjectdeclaration.service.UserService;
 import pl.mbab.subjectdeclaration.web.dto.UserRegistrationDto;
 
 import javax.validation.Valid;
-import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/registration")
@@ -27,6 +27,7 @@ public class UserRegistrationController {
     @Autowired
     private FieldService fieldService;
 
+
     @ModelAttribute("user")
     public UserRegistrationDto userRegistrationDto() {
         return new UserRegistrationDto();
@@ -34,15 +35,16 @@ public class UserRegistrationController {
 
     @GetMapping
     public String showRegistrationForm(Model model) {
-        List<Field> fields = fieldService.getAllFields();
-        model.addAttribute("fields", fields);
+        Set<Field> fieldsub = fieldService.getAllFields();
+        model.addAttribute("fieldsub", fieldsub);
         return "registration";
     }
 
     @PostMapping
     public String registerUserAccount(@ModelAttribute("user") @Valid UserRegistrationDto userDto,
-                                      BindingResult result){
-
+                                      BindingResult result, Model model){
+        Set<Field> fieldsub = fieldService.getAllFields();
+        model.addAttribute("fieldsub", fieldsub);
         User existing = userService.findByEmail(userDto.getEmail());
         if (existing != null){
             result.rejectValue("email", null, "There is already an account registered with that email");

@@ -1,33 +1,75 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1>Basket</h1>
-
-<table class="table table-bordered">
-    <thead>
-    <tr>
-        <th>Sygnatura</th>
-        <th>Przedmiot</th>
-        <th>Typ zajęć</th>
-        <th>Wykładowca</th>
-        <th>Termin</th>
-        <th>Dodaj</th>
-    </tr>
-    </thead>
-    <tbody id="myTable">
-    <tr th:each="course: ${user.courses}">
-        <td th:text="${user.courses.subject.getSignature() +'-'+user.courses.lecturer.getSignature()}">Sygnatura</td>
-        <td th:text="${user.courses.getName()}">Przedmiot</td>
-        <td th:text="${user.courses.type.getValue()}">Typ zajęć</td>
-        <td th:text="${user.courses.lecturer.getName()}">Wykładowca</td>
-        <td th:text="${user.courses.day.getValue() + ' ' + user.courses.startTime + '-' + user.courses.endTime}">Termin</td>
-        <td th:text="${user.courses.lecturer.name}">Dodaj</td>
-    </tr>
-    </tbody>
-</table>
+<a href th:href="@{/}">Strona główna</a>
+<div class="container">
+    <h2>Striped Rows</h2>
+    <p>The .table-striped class adds zebra-stripes to a table:</p>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Poniedziałek</th>
+            <th>Wtorek</th>
+            <th>Środa</th>
+            <th>Czwartek</th>
+            <th>Piątek</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>08:00</br>-</br>09:30</td>
+            <td th:each="i: ${#numbers.sequence(0,4)}" th:utext="${basket[0][i]}!=null ?
+             ${basket[0][i].subject.getName()} + '</br>' + ${basket[0][i].type.getValue()}  + '</br>' +
+             ${basket[0][i].venue} : ''"></td>
+        </tr>
+        <tr>
+            <td>09:50</br>-</br>11:20</td>
+            <td th:each="i: ${#numbers.sequence(0,4)}" th:utext="${basket[1][i]}!=null ?
+             ${basket[1][i].subject.getName()} + '</br>' + ${basket[1][i].type.getValue()}  + '</br>' +
+             ${basket[1][i].venue} : ''"></td>
+        </tr>
+        <tr>
+            <td>11:40</br>-</br>13:10</td>
+            <td th:each="i: ${#numbers.sequence(0,4)}" th:utext="${basket[2][i]}!=null ?
+             ${basket[2][i].subject.getName()} + '</br>' + ${basket[2][i].type.getValue()}  + '</br>' +
+             ${basket[2][i].venue} : ''"></td>
+        </tr>
+        <tr>
+            <td>13:30</br>-</br>15:00</td>
+            <td th:each="i: ${#numbers.sequence(0,4)}" th:utext="${basket[3][i]}!=null ?
+             ${basket[3][i].subject.getName()} + '</br>' + ${basket[3][i].type.getValue()}  + '</br>' +
+             ${basket[3][i].venue} : ''"></td>
+        </tr>
+        <tr>
+            <td>15:20</br>-</br>16:50</td>
+            <td th:each="i: ${#numbers.sequence(0,4)}" th:utext="${basket[4][i]}!=null ?
+             ${basket[4][i].subject.getName()} + '</br>' + ${basket[4][i].type.getValue()}  + '</br>' +
+             ${basket[4][i].venue} : ''"></td>
+        </tr>
+        <tr>
+            <td>17:10</br>-</br>18:40</td>
+            <td th:each="i: ${#numbers.sequence(0,4)}" th:utext="${basket[5][i]}!=null ?
+             ${basket[5][i].subject.getName()} + '</br>' + ${basket[5][i].type.getValue()}  + '</br>' +
+             ${basket[5][i].venue} : ''"></td>
+        </tr>
+        <tr>
+            <td>19:00</br>-</br>20:30</td>
+            <td th:each="i: ${#numbers.sequence(0,4)}" th:utext="${basket[6][i]}!=null ?
+             ${basket[6][i].subject.getName()} + '</br>' + ${basket[6][i].type.getValue()}  + '</br>' +
+             ${basket[6][i].venue} : ''"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
