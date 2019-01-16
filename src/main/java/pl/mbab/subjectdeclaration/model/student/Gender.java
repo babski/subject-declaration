@@ -1,8 +1,8 @@
 package pl.mbab.subjectdeclaration.model.student;
 
 public enum Gender {
-    MALE ("mężczyzna"),
-    FEMALE ("kobieta");
+    FEMALE ("kobieta"),
+    MALE ("mężczyzna");
 
     private String name;
 

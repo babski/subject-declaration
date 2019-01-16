@@ -1,73 +1,203 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <title>Filterable table</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="../static/css/style.css" th:href="|@{../css/style.css}|">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+    <title>Blogen Admin Area</title>
 </head>
 <body>
-<a href th:href="@{/}">Strona główna</a>
-<a href th:href="@{/courses/field1}">Dodaj kierunkowy</a>
-<a href th:href="@{/courses/field2b}">Dodaj związany z kierunkiem</a>
-<div class="container mt-3">
-    <h2>Filterable Table</h2>
-    <p>Type something in the input field to search the table for first names, last names or emails:</p>
-    <input class="form-control" id="myInput" type="text" placeholder="Search..">
-    <br>
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>Sygnatura</th>
-            <th>Przedmiot</th>
-            <th>Typ zajęć</th>
-            <th>Wykładowca</th>
-            <th>Termin</th>
-            <th>Dodaj</th>
-        </tr>
-        </thead>
-        <tbody id="myTable">
-        <tr th:each="course: ${courses}">
-            <td th:text="${course.subject.getSignature() +'-'+course.lecturer.getSignature()}">Sygnatura</td>
-            <td th:text="${course.subject.getName()}">Przedmiot</td>
-            <td th:text="${course.type.getValue()}">Typ zajęć</td>
-            <td th:text="${course.lecturer.getName()}">Wykładowca</td>
-            <td th:text="${course.day.getValue() + ' ' + course.startTime + '-' + course.endTime}">Termin</td>
-            <td> <form action="#" th:action="@{'/addcourse/'}" th:object="${course}" method="post">
-                <input type="hidden" id="courseId" name="courseId" th:value="${course.id}" />
-                <input type="submit" value="Dodaj"/>
-        </form></td>
+<nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse p-0">
+    <div class="container">
+        <button class="navbar-toggler navbar-toggler-right" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a href="index.html" class="navbar-brand mr-3">SD</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item px-2">
+                    <a href="../" class="nav-link">Koszyk</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link active dropdown-toggle" data-toggle="dropdown">Dodaj przedmiot</a>
+                    <div class="dropdown-menu">
+                        <a href="/../../courses/fielda" class="dropdown-item">kierunkowy</a>
+                        <a href="/../../courses/fieldb" class="dropdown-item">zw. z kierunkiem</a>
+                        <a href="/../../courses/all" class="dropdown-item">dowolny</a>
+                    </div>
+                </li>
+                <li class="nav-item px-2">
+                    <a href="/showlist" class="nav-link">Plan zajęć</a>
+                </li>
+                <li class="nav-item px-2">
+                    <a href="users.html" class="nav-link">Zasady</a>
+                </li>
+            </ul>
 
-            <!--<td th:if="${!course.lecturer.getSignature().equals('0000')}" th:text="${course.subject.getSignature() +'-'+course.lecturer.getSignature()}">Sygnatura</td>-->
-            <!--<td th:if="${!course.lecturer.getSignature().equals('0000')}" th:text="${course.subject.getName()}">Przedmiot</td>-->
-            <!--<td th:if="${!course.lecturer.getSignature().equals('0000')}" th:text="${course.type.getValue()}">Typ zajęć</td>-->
-            <!--<td th:if="${!course.lecturer.getSignature().equals('0000')}" th:text="${course.lecturer.getName()}">Wykładowca</td>-->
-            <!--<td th:if="${!course.lecturer.getSignature().equals('0000')}" th:text="${course.day.getValue() + ' ' + course.startTime + '-' + course.endTime}">Termin</td>-->
-            <!--<td th:if="${!course.lecturer.getSignature().equals('0000')}" > <form action="#" th:action="@{'/addcourse/'}" th:object="${course}" method="post">-->
-                <!--<input type="hidden" id="courseId" name="courseId" th:value="${course.id}" />-->
-                <!--<input type="submit" value="Dodaj"/>-->
-            <!--</form></td>-->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown mr-3">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
+                        Welcome Brad</a>
+                    <div class="dropdown-menu">
+                        <a href="profile.html" class="dropdown-item">
+                            <i class="fa fa-user-circle"></i> Profile
+                        </a>
+                        <a href="settings.html" class="dropdown-item">
+                            <i class="fa fa-gear"></i> Settings
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="/login" class="nav-link">
+                        <i class="fa fa-user-times"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-        </tr>
-        </tbody>
-    </table>
+<header id="main-header" class="py-2 bg-success text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1><i class="fas fa-cart-plus"></i> Dodaj dowolny przedmiot</h1>
+            </div>
+        </div>
+    </div>
+</header>
 
-    <p>Note that we start the search in tbody, to prevent filtering the table headers.</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Dodaj przedmiot kierunkowy</h4>
+                </div>
+                <input class="form-control" id="myInput" type="text" placeholder="Szukaj...">
+                <table class="table table-sm table-striped table-hover" style="font-size: 12px">
+                    <thead class="thead-inverse">
+                    <tr>
+                        <th>Sygnatura</th>
+                        <th>Przedmiot</th>
+                        <th>Typ zajęć</th>
+                        <th>Prowadzący</th>
+                        <th>Termin</th>
+                        <th>Pkt ECTS</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody id="myTable">
+                    <tr style="vertical-align: middle" th:each="course: ${courses}">
+                        <td th:text="${course.subject.getSignature() +'-'+course.lecturer.getSignature()}"></td>
+                        <td th:text="${course.subject.getName()}"></td>
+                        <td th:text="${course.type.getValue()}"></td>
+                        <td th:text="${course.lecturer.getName()}"></td>
+                        <td th:text="${course.day.getValue() + ' ' + course.startTime + '-' + course.endTime}"></td>
+                        <td th:text="${course.subject.isComplex()} and ${course.type == T(pl.mbab.subjectdeclaration.model.subject.CourseType).CLASSES} ? '' : ${course.subject.getEcts()}"></td>
+                        <td>
+                            <form action="#" th:action="@{'/addcourse/'}" th:object="${course}" method="post">
+                                <input type="hidden" id="courseId" name="courseId" th:value="${course.id}"/>
+                                <input type="submit" class="btn btn-outline-primary btn-sm" value="Dodaj"/>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
-
 <script>
-    $(document).ready(function(){
-        $("#myInput").on("keyup", function() {
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
             var value = $(this).val().toLowerCase();
-            $("#myTable tr").filter(function() {
+            $("#myTable tr").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
     });
 </script>
-
 </body>
 </html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="pl" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--<meta charset="UTF-8">-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>-->
+<!--<title>Filterable table</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<a href th:href="@{/}">Strona główna</a>-->
+<!--<a href th:href="@{/courses/field1}">Dodaj kierunkowy</a>-->
+<!--<a href th:href="@{/courses/field2b}">Dodaj związany z kierunkiem</a>-->
+<!--<div class="container mt-3">-->
+<!--<h2>Filterable Table</h2>-->
+<!--<p>Type something in the input field to search the table for first names, last names or emails:</p>-->
+<!--<input class="form-control" id="myInput" type="text" placeholder="Search..">-->
+<!--<br>-->
+<!--<table class="table table-bordered">-->
+<!--<thead>-->
+<!--<tr>-->
+<!--<th>Sygnatura</th>-->
+<!--<th>Przedmiot</th>-->
+<!--<th>Typ zajęć</th>-->
+<!--<th>Wykładowca</th>-->
+<!--<th>Termin</th>-->
+<!--<th>Dodaj</th>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody id="myTable">-->
+<!--<tr th:each="course: ${courses}">-->
+<!--<td th:text="${course.subject.getSignature() +'-'+course.lecturer.getSignature()}"></td>-->
+<!--<td th:text="${course.subject.getName()}"></td>-->
+<!--<td th:text="${course.type.getValue()}"></td>-->
+<!--<td th:text="${course.lecturer.getName()}"></td>-->
+<!--<td th:text="${course.day.getValue() + ' ' + course.startTime + '-' + course.endTime}"></td>-->
+<!--<td>-->
+<!--<form action="#" th:action="@{'/addcourse/'}" th:object="${course}" method="post">-->
+<!--<input type="hidden" id="courseId" name="courseId" th:value="${course.id}"/>-->
+<!--<input type="submit" value="Dodaj"/>-->
+<!--</form>-->
+<!--</td>-->
+
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->
+
+<!--<p>Note that we start the search in tbody, to prevent filtering the table headers.</p>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--$(document).ready(function () {-->
+<!--$("#myInput").on("keyup", function () {-->
+<!--var value = $(this).val().toLowerCase();-->
+<!--$("#myTable tr").filter(function () {-->
+<!--$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)-->
+<!--});-->
+<!--});-->
+<!--});-->
+<!--</script>-->
+
+<!--</body>-->
+<!--</html>-->

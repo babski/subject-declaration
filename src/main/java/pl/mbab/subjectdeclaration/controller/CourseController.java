@@ -27,7 +27,7 @@ public class CourseController {
         this.userService = userService;
     }
 
-    @GetMapping("/courses")
+    @GetMapping("/courses/all")
     public String listCourses(Model model) {
         Set<Course> courses = courseService.getAllCourses()
                 .stream().filter(x -> !x.getLecturer().getSignature().equals("0000"))
@@ -36,24 +36,24 @@ public class CourseController {
         return "courses";
     }
 
-    @GetMapping("/courses/field1")
-    public String fieldCourses1(Authentication authentication, Model model) {
+    @GetMapping("/courses/fielda")
+    public String fieldCoursesA(Authentication authentication, Model model) {
         String login = authentication.getName();
         boolean group1 = true;
         User user = userService.findByEmail(login);
         Set<Course> courses = userService.getFieldCourses(login, group1);
         model.addAttribute("courses", courses);
-        return "field1";
+        return "fielda";
     }
 
-    @GetMapping("/courses/field2b")
-    public String fieldCourses2(Authentication authentication, Model model) {
+    @GetMapping("/courses/fieldb")
+    public String fieldCoursesB(Authentication authentication, Model model) {
         String login = authentication.getName();
         boolean group1 = false;
         User user = userService.findByEmail(login);
         Set<Course> courses = userService.getFieldCourses(login, group1);
         model.addAttribute("courses", courses);
-        return "field2b";
+        return "fieldb";
     }
 
     @GetMapping("/showlist")
@@ -65,23 +65,13 @@ public class CourseController {
         return "showlist";
     }
 
-    @GetMapping("/basket")
-    public String showBasket(Model model, Authentication authentication) {
-        String login = authentication.getName();
-        User user = userService.findByEmail(login);
-        double ects = courseService.countEcts(user.getCourseBasket());
-        model.addAttribute("user", user);
-        model.addAttribute("ects", ects);
-        return "basket";
-    }
-
     @PostMapping("/addcourse")
     public String addCourseById(@RequestParam("courseId") String courseId, Authentication authentication) {
         String login = authentication.getName();
         log.debug(login);
         Long id = Long.parseLong(courseId);
         userService.addCourse(login, id);
-        return "index";
+        return "redirect:/";
     }
 
     @PostMapping("/validate")
@@ -98,6 +88,6 @@ public class CourseController {
         log.debug(login);
         Long id = Long.parseLong(courseId);
         userService.deleteCourse(login, id);
-        return "index";
+        return "redirect:/";
     }
 }

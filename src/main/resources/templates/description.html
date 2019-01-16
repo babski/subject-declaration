@@ -82,61 +82,7 @@
         </div>
     </div>
 </header>
-<table class="table table-striped table-bordered" style="font-size: 12px">
-    <thead>
-    <tr>
-        <th style="width: 5%"></th>
-        <th style="width: 19%" class="text-center">Poniedziałek</th>
-        <th style="width: 19%" class="text-center">Wtorek</th>
-        <th style="width: 19%" class="text-center">Środa</th>
-        <th style="width: 19%" class="text-center">Czwartek</th>
-        <th style="width: 19%" class="text-center">Piątek</th>
-    </tr>
-    </thead>
-    <tbody class="text-center">
-    <tr>
-        <td class="font-weight-bold">08:00</br>-</br>09:30</td>
-        <td th:each="i: ${#numbers.sequence(0,4)}" th:utext="${basket[0][i]}!=null ?
-             ${basket[0][i].subject.getName()} + '</br>' + ${basket[0][i].type.getValue()}  + '</br>' +
-             ${basket[0][i].venue} : ''"></td>
-    </tr>
-    <tr>
-        <td class="font-weight-bold">09:50</br>-</br>11:20</td>
-        <td th:each="i: ${#numbers.sequence(0,4)}" th:utext="${basket[1][i]}!=null ?
-             ${basket[1][i].subject.getName()} + '</br>' + ${basket[1][i].type.getValue()}  + '</br>' +
-             ${basket[1][i].venue} : ''"></td>
-    </tr>
-    <tr>
-        <td class="font-weight-bold">11:40</br>-</br>13:10</td>
-        <td th:each="i: ${#numbers.sequence(0,4)}" th:utext="${basket[2][i]}!=null ?
-             ${basket[2][i].subject.getName()} + '</br>' + ${basket[2][i].type.getValue()}  + '</br>' +
-             ${basket[2][i].venue} : ''"></td>
-    </tr>
-    <tr>
-        <td class="font-weight-bold">13:30</br>-</br>15:00</td>
-        <td th:each="i: ${#numbers.sequence(0,4)}" th:utext="${basket[3][i]}!=null ?
-             ${basket[3][i].subject.getName()} + '</br>' + ${basket[3][i].type.getValue()}  + '</br>' +
-             ${basket[3][i].venue} : ''"></td>
-    </tr>
-    <tr>
-        <td class="font-weight-bold">15:20</br>-</br>16:50</td>
-        <td th:each="i: ${#numbers.sequence(0,4)}" th:utext="${basket[4][i]}!=null ?
-             ${basket[4][i].subject.getName()} + '</br>' + ${basket[4][i].type.getValue()}  + '</br>' +
-             ${basket[4][i].venue} : ''"></td>
-    </tr>
-    <tr>
-        <td class="font-weight-bold">17:10</br>-</br>18:40</td>
-        <td th:each="i: ${#numbers.sequence(0,4)}" th:utext="${basket[5][i]}!=null ?
-             ${basket[5][i].subject.getName()} + '</br>' + ${basket[5][i].type.getValue()}  + '</br>' +
-             ${basket[5][i].venue} : ''"></td>
-    </tr>
-    <tr>
-        <td class="font-weight-bold">19:00</br>-</br>20:30</td>
-        <td th:each="i: ${#numbers.sequence(0,4)}" th:utext="${basket[6][i]}!=null ?
-             ${basket[6][i].subject.getName()} + '</br>' + ${basket[6][i].type.getValue()}  + '</br>' +
-             ${basket[6][i].venue} : ''"></td>
-    </tr>
-    </tbody>
-</table>
+
+
 </body>
 </html>

@@ -14,17 +14,17 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @FieldMatch.List({
-        @FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match"),
-        @FieldMatch(first = "email", second = "confirmEmail", message = "The email fields must match")
+        @FieldMatch(first = "password", second = "confirmPassword", message = "Pola haseł powinny do siebie pasować"),
+        @FieldMatch(first = "email", second = "confirmEmail", message = "Pola email powiiny do siebie pasować")
 })
 @Getter
 @Setter
 public class UserRegistrationDto {
 
-    @Size(min=3, max=30, message = "Imię powinno zawierać od 3 do 20 znaków")
+    @Size(min=3, max=20, message = "Imię powinno zawierać od 3 do 20 znaków")
     private String firstName;
 
-    @Size(min=3, max=30, message = "Nazwisko powinno zawierać od 3 do 20 znaków")
+    @Size(min=3, max=40, message = "Nazwisko powinno zawierać od 3 do 40 znaków")
     private String lastName;
 
     @PeselConstraint
@@ -47,7 +47,7 @@ public class UserRegistrationDto {
 
     private String confirmEmail;
 
-    @AssertTrue
+    @AssertTrue(message = "Należy zaznaczyć powyższe pole")
     private Boolean terms;
 
 }

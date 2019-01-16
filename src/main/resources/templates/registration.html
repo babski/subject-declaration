@@ -4,23 +4,15 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
+    <link rel="stylesheet" href="../static/css/style.css" th:href="|@{../css/style.css}|">
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
 
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <!-- Popper JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-    <title>Registration</title>
+    <title>Formularz rejestracji</title>
 </head>
 <body>
 <div class="container">
@@ -29,11 +21,11 @@
 
             <div th:if="${param.success}">
                 <div class="alert alert-info">
-                    You've successfully registered to our awesome app!
+                    Rejestracja przebiegła pomyślnie!
                 </div>
             </div>
 
-            <h1>Registration</h1>
+            <h1>Formularz rejestracji</h1>
             <form th:action="@{/registration}" th:object="${user}" method="post">
 
                 <p class="error-message"
@@ -78,7 +70,7 @@
                          th:each="gender : ${T(pl.mbab.subjectdeclaration.model.student.Gender).values()}">
                         <label for="gender" class="form-check-label">
                             <input type="radio" id="gender" class="form-check-input" th:field="*{gender}"
-                                   th:value="${gender}" th:text="${gender.value}"/>
+                                   th:value="${gender}" th:text="${gender.value}" />
                         </label>
                     </div>
                     <p class="error-message"
@@ -138,7 +130,7 @@
                 </div>
                 <div class="form-group"
                      th:classappend="${#fields.hasErrors('confirmPassword')}? 'has-error':''">
-                    <label for="confirmPassword" class="control-label">Potwierdź password</label>
+                    <label for="confirmPassword" class="control-label">Potwierdź hasło</label>
                     <input id="confirmPassword"
                            class="form-control"
                            type="password"
@@ -153,15 +145,15 @@
                            type="checkbox"
                            th:field="*{terms}"/>
                     <label class="control-label" for="terms">
-                        I agree with the <a href="#">terms and conditions</a> for Registration.
+                        Zapoznałem/-am się z <a href="#">zasadami wyboru przedmiotów</a>.
                     </label>
                     <p class="error-message"
                        th:each="error : ${#fields.errors('terms')}"
                        th:text="${error}">Validation error</p>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success">Register</button>
-                    <span>Already registered? <a href="/" th:href="@{/login}">Login here</a></span>
+                    <button type="submit" class="btn btn-success">Zarejestruj</button>
+                    <span>Zarejestrowałeś/-aś się już? <a href="/" th:href="@{/login}">Zaloguj się tutaj</a></span>
                 </div>
 
             </form>
