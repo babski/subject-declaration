@@ -70,6 +70,11 @@ public class CourseController {
         return "description";
     }
 
+    @GetMapping("/rules")
+    public String rules() {
+        return "rules";
+    }
+
     @PostMapping("/addcourse")
     public String addCourseById(@RequestParam("courseId") String courseId, Authentication authentication) {
         String login = authentication.getName();
