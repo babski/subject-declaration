@@ -65,6 +65,11 @@ public class CourseController {
         return "showlist";
     }
 
+    @GetMapping("/description")
+    public String description() {
+        return "description";
+    }
+
     @PostMapping("/addcourse")
     public String addCourseById(@RequestParam("courseId") String courseId, Authentication authentication) {
         String login = authentication.getName();

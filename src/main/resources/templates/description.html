@@ -1,23 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="../static/css/style.css" th:href="|@{../css/style.css}|">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-            crossorigin="anonymous"></script>
+    <title>Bootstrap Sandbox</title>
     <title>Blogen Admin Area</title>
 </head>
 <body>
@@ -44,8 +33,8 @@
                     <a href="/showlist" class="nav-link active">Plan zajęć</a>
                 </li>
                 <li class="nav-item px-2">
-                <a href="users.html" class="nav-link">Zasady</a>
-            </li>
+                    <a href="users.html" class="nav-link">Zasady</a>
+                </li>
                 <li class="nav-item px-2">
                     <a href="users.html" class="nav-link">Opis kierunków</a>
                 </li>
@@ -83,6 +72,789 @@
     </div>
 </header>
 
+<div id="accordion" role="tablist">
+    <div class="card">
+        <div class="card-header" role="tab" id="heading">
+            <h5 class="mb-0"><a href="#collapse1"
+                                data-parent="#accordion" data-toggle="collapse">
+                Analiza danych - Big Data
+            </a></h5>
+        </div>
+        <div id="collapse1" class="collapse">
+            <div class="card-block">
+                Studia drugiego stopnia na kierunku analiza danych – big data kształcą specjalistów w zakresie
+                pozyskiwania danych z różnych źródeł oraz ich analizy, dają zaawansowaną wiedzę i kompetencje
+                umożliwiające podjęcie pracy zawodowej na stanowisku specjalisty zaawansowanej analizy danych, w
+                przedsiębiorstwach produkcyjnych, bankach, firmach ubezpieczeniowych i telekomunikacyjnych,
+                administracji publicznej oraz centrach badawczych wyspecjalizowanych w zaawansowanej analityce danych.
+                Studia te przygotowują do prowadzenia prac badawczych i do podjęcia studiów trzeciego stopnia.
+                <hr>
+                <p class="font-weight-bold">Wiedza</p>
+                Absolwent studiów drugiego stopnia na kierunku analiza danych – big data ma zaawansowaną wiedzę:
+                <ul>
+                    <li>
+                        z zakresu informatyki odnośnie do metod pozyskiwania, porządkowania, przechowywania i
+                        przetwarzania ustrukturalizowanych i nieustrukturalizowanych danych
+                    </li>
+                    <li>
+                        w zakresie wydobywania wiedzy ze złożonych struktur danych, a także jej reprezentacji w
+                        systemach informatycznych
+                    </li>
+                    <li>
+                        matematycznych, statystycznych i informatycznych metodach i narzędziach analizy danych
+                        niezbędnych w analizie zjawisk społecznych i gospodarczych
+                    </li>
+                    <li>
+                        metodach i narzędziach budowy modeli prognostycznych i symulacyjnych z odniesieniem do zjawisk
+                        społecznych i gospodarczych, gdzie taka wiedza może być wykorzystana
+                    </li>
+                    <li>
+                        w zakresie metod opracowywania wyników analizy danych.
+                    </li>
+                </ul>
+                <hr>
+                <p class="font-weight-bold">Umiejętności</p>
+                Absolwent studiów drugiego stopnia na kierunku analiza danych – big data potrafi:
+                <ul>
+                    <li>
+                        pozyskać dane z różnych źródeł (bazy danych, pliki tekstowe, pliki multimedialne, sieci
+                        społecznościowe, dane sensoryczne i geolokacyjne)
+                    </li>
+                    <li>
+                        budować zapytania do SQL-owych, jak i nie SQL-owych baz danych
+                    </li>
+                    <li>
+                        przygotować dane do analizy
+                    </li>
+                    <li>
+                        budować modele analizy danych w oparciu o różnorodne narzędzia statystyczne, matematyczne i
+                        informatyczne oraz wyciągać wnioski i formułować sądy na ich podstawie
+                    </li>
+                    <li>
+                        projektować badania reprezentacyjne i prowadzić analizy statystyczne przy analizowaniu zjawisk i
+                        procesów gospodarczych
+                    </li>
+                    <li>
+                        analizować dane wielowymiarowe, stosować metody analizy wielowymiarowej w badaniach
+                        ekonomiczno-biznesowych (rynkowych i marketingowych) oraz w badaniach społecznych
+                    </li>
+                    <li>
+                        analizować dane przestrzenne
+                    </li>
+                    <li>
+                        dostosować metody prezentacji wyników analiz do wymagań odbiorców
+                    </li>
+                    <li>
+                        implementować systemy informatyczne oparte na przetwarzaniu wiedzy
+                    </li>
+                    <li>
+                        implementować wyniki analizy danych w rozwiązaniach biznesowych
+                    </li>
+                    <li>
+                        biegle posługiwać się przynajmniej jednym językiem obcym, prezentować wyniki swojej pracy w
+                        formie ustnej i pisemnej w języku polskim i obcym.
+                    </li>
+                </ul>
+                <hr>
+                <p class="font-weight-bold">Kompetencje społeczne</p>
+                Absolwent studiów drugiego stopnia na kierunku analiza danych:
+                <ul>
+                    <li>
+                        rozumie potrzebę i potrafi korzystać z podejścia ilościowego dla lepszego postrzegania, opisu i
+                        analizy otaczającej rzeczywistości ekonomicznej, społecznej, biznesowej
+                    </li>
+                    <li>
+                        jest świadomy odpowiedzialności zawodowej w pracy w podmiotach gospodarczych i instytucjach, w
+                        których wymagane jest stosowanie narzędzi matematycznych, statystycznych, ekonometrycznych i
+                        informatycznych
+                    </li>
+                    <li>
+                        daje przykład etycznych zachowań zawodowych
+                    </li>
+                    <li>
+                        rozumie własną i zbiorową odpowiedzialność za ważne wydarzenia społeczne i polityczne.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
+    <div class="card">
+        <div class="card-header" role="tab" id="heading">
+            <h5 class="mb-0"><a href="#collapse2"
+                                data-parent="#accordion" data-toggle="collapse">
+                E-biznes
+            </a></h5>
+        </div>
+        <div id="collapse2" class="collapse show">
+            <div class="card-block">
+                Studia drugiego stopnia na kierunku e-biznes dostarczają wiedzę teoretyczną i praktyczną z zakresu nauk
+                o zarządzaniu i nauk pokrewnych dotyczącą istoty, prawidłowości i problemów funkcjonowania organizacji
+                na rynku internetowym i w gospodarce cyfrowej. Studia te rozwijają kompetencje niezbędne do podjęcia
+                pracy zawodowej na stanowiskach specjalistycznych i kierowniczych średniego i wyższego szczebla w
+                firmach i instytucjach non-profit oraz w jednostkach administracji państwowej i samorządowej. Studia
+                przygotowują także do samodzielnej działalności gospodarczej, a także badawczej oraz kontynuacji
+                kształcenia na studiach doktoranckich.
+                <hr>
+                <p class="font-weight-bold">Wiedza</p>
+                Absolwent studiów drugiego stopnia na kierunku e-biznes ma zaawansowaną wiedzę:
+                <ul>
+                    zna metodykę zarządzania projektami
+                    <li>
+                        ma wiedzę dotyczącą złożonych procesów i zjawisk zachodzących w organizacjach i ich otoczeniu
+                    </li>
+                    <li>
+                        zna ekonomiczne, społeczne, technologiczne i prawne uwarunkowania e-biznesu
+                    </li>
+                    <li>
+                        zna podstawowe wzorce zachowania konsumentów w Internecie i w systemach
+                        informacyjno-komunikacyjnych
+                    </li>
+                    <li>
+                        rozumie wpływ technologii informacyjno-komunikacyjnych na funkcjonowanie organizacji i jej
+                        interesariuszy, jak i na całe społeczeństwo
+                    </li>
+                    <li>
+                        posiada wiedzę z zakresu zarządzania przedsięwzięciem e-biznesowym lub tradycyjnym
+                        wykorzystującym techniki e-biznesowe
+                    </li>
+                    <li>
+                        zna podstawowe metody analizy danych w e-biznesie
+                    </li>
+                    <li>
+                        zna metodykę prowadzenia prac badawczych.
+                    </li>
+                </ul>
+                <hr>
+                <p class="font-weight-bold">Umiejętności</p>
+                Absolwent studiów drugiego stopnia na kierunku e-biznes potrafi:
+                <ul>
+                    potrafi dokonać holistycznej oceny wpływu otoczenia na procesy zarządzania oraz podejmować decyzje
+                    zarządcze, zwłaszcza o charakterze taktycznym i strategicznym
+                    <li>
+                        potrafi krytycznie analizować, interpretować i oceniać zjawiska z zakresu funkcjonowania firm
+                        w gospodarce cyfrowej
+                    </li>
+                    <li>
+                        potrafi krytycznie analizować, interpretować i oceniać zjawiska z zakresu funkcjonowania firm
+                        w gospodarce cyfrowej
+                    </li>
+                    <li>
+                        umie formułować problemy projektowe, a także planować i kontrolować realizacje projektów i
+                        programów oraz zarządzać portfelem projektów
+                    </li>
+                    <li>
+                        potrafi zaprojektować przedsięwzięcie biznesowe w gospodarce cyfrowej, w szczególności w
+                        zakresie modelu biznesowego i strategii ukierunkowanych na rozwój relacji z klientami i innymi
+                        interesariuszami
+                    </li>
+                    <li>
+                        potrafi formułować strategie tradycyjnej organizacji w zakresie e-biznesu
+                    </li>
+                    <li>
+                        biegle posługuje się przynajmniej jednym językiem obcym.
+                    </li>
+                </ul>
+                <hr>
+                <p class="font-weight-bold">Kompetencje społeczne</p>
+                Absolwent studiów drugiego stopnia na kierunku e-biznes:
+                <ul>
+                    postawy przedsiębiorcze w zakresie rozwiązywania problemów oraz poszukiwania i wdrażania innowacji
+                    <li>
+                        umiejętność pracy zespołowej, kierowania zespołami (w tym zespołami zadaniowymi) oraz
+                        organizacji pracy własnej
+                    </li>
+                    <li>
+                        zdolność skutecznego komunikowania się, negocjowania oraz pracy w zespole, również z
+                        wykorzystaniem technologii informacyjno-komunikacyjnych
+                    </li>
+                    <li>
+                        nawyk samodzielnej pracy, samokształcenia oraz aktualizowania i kumulacji wiedzy z różnych
+                        źródeł
+                    </li>
+                    <li>
+                        świadomość etyki i odpowiedzialności związanej z wykonywanym zawodem.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" role="tab" id="heading">
+            <h5 class="mb-0"><a href="#collapse3"
+                                data-parent="#accordion" data-toggle="collapse">
+                Ekonomia
+            </a></h5>
+        </div>
+        <div id="collapse3" class="collapse show">
+            <div class="card-block">
+                Studia drugiego stopnia na kierunku ekonomia umożliwiają studentom zdobycie zaawansowanej wiedzy z
+                zakresu ekonomii i dyscyplin komplementarnych oraz rozwijają umiejętności przydatne do prowadzenia
+                działalności zawodowej na stanowiskach analitycznych i kierowniczych w organach administracji
+                publicznej, banku centralnym, dużych przedsiębiorstwach oraz w instytucjach i organizacjach zajmujących
+                się badaniami nad gospodarką. Studia te przygotowują do prowadzenia działalności gospodarczej na własny
+                rachunek, a także do podejmowania studiów trzeciego stopnia.
+                <hr>
+                <p class="font-weight-bold">Wiedza</p>
+                Absolwent studiów drugiego stopnia na kierunku ekonomia ma zaawansowaną wiedzę:
+                <ul>
+                    <li>
+                        ma wiedzę ogólną dotyczącą głównych teorii i metod badawczych z zakresu nauk ekonomicznych i
+                        pokrewnych
+                    </li>
+                    <li>
+                        zna historię myśli ekonomicznej
+                    </li>
+                    <li>
+                        zna mikroekonomię i makroekonomię na poziomie zaawansowanym
+                    </li>
+                    <li>
+                        ma zaawansowaną wiedzę z zakresu metod ilościowych w ekonomii
+                    </li>
+                    <li>
+                        ma pogłębioną wiedzę na temat instytucji ekonomicznych
+                    </li>
+                    <li>
+                        ma pogłębioną wiedzę na temat działów gospodarki
+                    </li>
+                    <li>
+                        ma pogłębioną wiedzę na temat rozwoju społeczno-gospodarczego
+                    </li>
+                    <li>
+                        wykazuje rozeznanie w najnowszych publikacjach z zakresu ekonomii i tym samym zna nowe
+                        osiągnięcia w zakresie teorii ekonomii oraz w zakresie wybranych działów ekonomii stosowanej.
+                    </li>
+                </ul>
+                <hr>
+                <p class="font-weight-bold">Umiejętności</p>
+                Absolwent studiów drugiego stopnia na kierunku ekonomia potrafi:
+                <ul>
+                    <li>
+                        wykorzystać wiedzę w pracy zawodowej
+                    </li>
+                    <li>
+                        stosować odpowiednio dobrany aparat analityczny w pracy badawczej
+                        integrować wiedzę z różnych działów ekonomii, różnych przedmiotów i kierunków myśli
+                        społecznoekonomicznej
+                    </li>
+                    <li>
+                        budować modele mikro- i makroekonomiczne, modele ekonometryczne i modele statystyczne
+                    </li>
+                    <li>
+                        krytycznie analizować, oceniać i interpretować zjawiska gospodarcze i społeczne
+                    </li>
+                    <li>
+                        obserwować oraz rozpoznawać tendencje zmian warunków lokalnych i globalnych na różnych
+                    </li>
+                    <li>
+                        zaplanować i zrealizować zadanie badawcze lub ekspertyzę
+                    </li>
+                    <li>
+                        dostrzec nowy problem badawczy lub zawodowy i poddać go profesjonalnej analizie
+                    </li>
+                    <li>
+                        logicznie wyciągać wnioski oraz formułować sądy na podstawie danych z różnych źródeł, również
+                        w sytuacji niepełnych informacji
+                    </li>
+                    <li>
+                        komunikować się ze specjalistami w swojej dziedzinie, a także z osobami z różnych środowisk
+                        społeczno-zawodowych
+                    </li>
+                    <li>
+                        sprawnie działać w warunkach stresu i pod presją czasu
+                    </li>
+                    <li>
+                        samodzielnie ukierunkować swoje dalsze uczenie się
+                    </li>
+                </ul>
+                <hr>
+                <p class="font-weight-bold">Kompetencje społeczne</p>
+                Absolwent studiów drugiego stopnia na kierunku ekonomia:
+                <ul>
+                    <li>
+                        kompleksowo postrzega problemy społeczno-gospodarcze
+
+                    </li>
+                    <li>
+                        cechuje się uczciwością w dyskusjach nad problemami społecznymi i gospodarczymi
+                    </li>
+                    <li>
+                        wykazuje się przedsiębiorczością
+                    </li>
+                    <li>
+                        daje przykład etycznych zachowań zawodowych
+                    </li>
+                    <li>
+                        daje przykład etycznych zachowań zawodowych
+                    </li>
+                    <li>
+                        ma świadomość pełnionej roli zawodowej i społecznej
+                    </li>
+                    <li>
+                        czuje odpowiedzialność za działania własne i współpracowników.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" role="tab" id="heading">
+            <h5 class="mb-0"><a href="#collapse4"
+                                data-parent="#accordion" data-toggle="collapse">
+                Finanse i rachunkowość
+            </a></h5>
+        </div>
+        <div id="collapse4" class="collapse show">
+            <div class="card-block">
+                Studia drugiego stopnia na kierunku finanse i rachunkowość dostarczają wiedzę kierunkową, która pogłębia
+                znajomość zarządzania finansami podmiotów gospodarczych (w tym instytucji finansowych), ze szczególnym
+                uwzględnieniem uwarunkowań podejmowania decyzji zarządczych na podstawie wyników analiz finansowych i
+                badań, oraz wiedzy specjalistycznej, która daje dobre podstawy do rozpoczęcia pracy zawodowej i do
+                kontynuowania nauki w ramach kształcenia ustawicznego. Studia te rozwijają kompetencje umożliwiające –
+                po odbyciu stosownej praktyki – podjęcie pracy zawodowej w charakterze eksperta lub menedżera w danej
+                dziedzinie finansów i rachunkowości lub prowadzenia działalności gospodarczej na własny rachunek oraz
+                zdobywanie uprawnień certyfikowanych/licencjonowanych w kraju i za granicą. Przygotowują do podejmowania
+                studiów trzeciego stopnia.
+                <hr>
+                <p class="font-weight-bold">Wiedza</p>
+                Absolwent studiów drugiego stopnia na kierunku finanse i rachunkowość ma zaawansowaną wiedzę:
+                <ul>
+                    <li>
+                        rozumie wpływ polityki pieniężnej na sytuację na rynkach finansowych oraz działalność
+                        instytucji finansowych i innych podmiotów gospodarczych
+                    </li>
+                    <li>
+                        ma wiedzę na temat interpretacji i stosowania zaawansowanych zasad rachunkowości finansowej
+                    </li>
+                    <li>
+                        ma wiedzę na temat interpretacji i stosowania instrumentów rachunkowości zarządczej (w tym
+                        rachunku kosztów)
+                    </li>
+                    <li>
+                        zna objaśnianie, interpretację i oceny wpływu przepisów prawnych (w tym podatkowych) na
+                        prowadzenie działalności gospodarczej
+                    </li>
+                    <li>
+                        ma wiedzę na temat analizowania, porównywania i wybierania rozwiązania inwestycyjnego oraz
+                        sposobu pozyskiwania środków na działalność gospodarczą
+                    </li>
+                    <li>
+                        rozumie znaczenie zidentyfikowania, oceniania i przewidywania konsekwencji ryzyka
+                        podejmowanego w działalności podmiotów gospodarczych, w tym instytucji finansowych
+                    </li>
+                    <li>
+                        zna proces planowania finansowego oraz zasady wybrania odpowiednich narzędzi do planowania i
+                        kontroli.
+                    </li>
+                </ul>
+                <hr>
+                <p class="font-weight-bold">Umiejętności</p>
+                Absolwent studiów drugiego stopnia na kierunku finanse i rachunkowość potrafi:
+                <ul>
+                    <li>
+                        dokonywać pogłębionych analiz finansowych, w tym opartych na instrumentach rachunkowości
+                        zarządczej, oraz formułować na ich podstawie wnioski i rekomendacje
+                    </li>
+                    <li>
+                        łączyć zagadnienia finansowe z innymi aspektami prowadzenia działalności gospodarczej (NP.
+                        marketing, zarządzanie)
+                    </li>
+                    <li>
+                        wyliczyć efektywność inwestycji oraz koszt finansowania wraz z określeniem optymalnego
+                        portfela inwestycji/źródeł finansowania
+                    </li>
+                    <li>
+                        ocenić poziom ryzyka finansowego i formułować na tej podstawie wnioski i rekomendacje
+                    </li>
+                    <li>
+                        sporządzić plan finansowy podmiotu gospodarczego
+                    </li>
+                    <li>
+                        uzasadnić w sposób kompetentny i komunikatywny zaproponowane rozwiązania i podjęte decyzje,
+                        jak również poddać je krytyce
+                    </li>
+                    <li>
+                        sprawnie działać w warunkach stresu i pod presją czasu
+                    </li>
+                    <li>
+                        biegle posługiwać się przynajmniej jednym językiem obcym.
+                    </li>
+                </ul>
+                <hr>
+                <p class="font-weight-bold">Kompetencje społeczne</p>
+                Absolwent studiów drugiego stopnia na kierunku finanse i rachunkowość wykazuje:
+                <ul>
+                    <li>
+                        inicjatywę i zaangażowanie w organizowanie pracy zespołów, w tym zespołów
+                        interdyscyplinarnych,
+                    </li>
+                    <li>
+                        rozumienie i akceptację zasad etyki w dziedzinie finansów i rachunkowości, w tym kodeksów
+                        dobrych praktyk
+                    </li>
+                    <li>
+                        zrozumienie zasad społecznej odpowiedzialności biznesu i potrzeby ich stosowania
+                    </li>
+                    <li>
+                        otwartość na samodzielne aktualizowanie i poszerzanie swojej wiedzy specjalistycznej na
+                        podstawie źródeł krajowych i zagranicznych. kompleksowo postrzega problemy społeczno-gospodarcze
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" role="tab" id="heading">
+            <h5 class="mb-0"><a href="#collapse5"
+                                data-parent="#accordion" data-toggle="collapse">
+                Metody ilościowe w ekonomii i systemy informacyjne
+            </a></h5>
+        </div>
+        <div id="collapse5" class="collapse show">
+            <div class="card-block">
+                Studia drugiego stopnia na kierunku metody ilościowe w ekonomii i systemy informacyjne umożliwiają
+                pozyskanie zaawansowanej wiedzy i umiejętności z zakresu szeroko rozumianych metod ilościowych w
+                ekonomii oraz systemów informatycznych. Oferta dydaktyczna kierunku daje możliwość specjalizacji w kilku
+                profilach kształcenia, nakierowanych na metody ilościowych analiz ekonomicznych i społecznych w skali
+                mikro i makro oraz na informatykę gospodarczą i zagadnienia nowoczesnej gospodarki cyfrowej. Program
+                obejmuje przedmioty ściśle związane z praktyką analiz statystycznych, ekonometrycznych i finansowych,
+                podejmowania decyzji, demografii, ubezpieczeń i informatyki. Studia te rozwijają kompetencje, które
+                sprawiają, że absolwenci tego kierunku są dobrze przygotowani do pracy w centrach badawczych,
+                instytucjach publicznych oraz centrach biznesowych kraju, a także instytucjach międzynarodowych.
+                Prezentowana w toku studiów wiedza i kształtowane umiejętności są dobrym przygotowaniem do prowadzenia
+                prac badawczych i do podjęcia studiów trzeciego stopnia.
+                <hr>
+                <p class="font-weight-bold">Wiedza</p>
+                Absolwent studiów drugiego stopnia na kierunku ekonomia ma zaawansowaną wiedzę:
+                <ul>
+                    <li>
+                        metodach i narzędziach matematycznych, statystycznych i ekonometrycznych niezbędnych do
+                        analizy zjawisk gospodarczych i społecznych w skali mikro- i makroekonomicznej
+                    </li>
+                    <li>
+                        projektowaniu i wdrażaniu zaawansowanych systemów informatycznych i baz danych w organizacjach
+                        gospodarczych i administracyjnych oraz formułowaniu strategii ich informatyzacji
+                    </li>
+                    <li>
+                        teorii i zastosowaniach metod ilościowych
+                    </li>
+                    <li>
+                        dostępnych narzędziach modelowania zjawisk gospodarczych i społecznych oraz światowych
+                        trendach metodologicznych w tym zakresie, dzięki którym może on tworzyć własne narzędzia
+                        analityczne, o ile zachodzi taka potrzeba.
+                    </li>
+                </ul>
+                <hr>
+                <p class="font-weight-bold">Umiejętności</p>
+                Absolwent studiów drugiego stopnia na kierunku metody ilościowe w ekonomii i systemy informacyjne
+                potrafi:
+                <ul>
+                    <li>
+                        projektować rozwiązania problemów makro- i mikroekonomicznych z wykorzystaniem różnorodnych
+                        narzędzi analitycznych, w tym nowoczesnych technologii informatycznych
+                    </li>
+                    <li>
+                        modelować i prognozować zjawiska i procesy gospodarcze
+                    </li>
+                    <li>
+                        identyfikować narzędzia ekonometryczno-statystyczne do analizy problemów ekonomicznych i
+                        społecznych
+                    </li>
+                    <li>
+                        analizować dane wielowymiarowe; stosować metody analizy wielowymiarowej w badaniach
+                        ekonomiczno-biznesowych (rynkowych i marketingowych) oraz w badaniach społecznych
+                    </li>
+                    <li>
+                        projektować badania reprezentacyjne i prowadzić analizy statystyczne
+                    </li>
+                    <li>
+                        identyfikować, szacować i interpretować modele ekonomiczne i finansowe szeregów czasowych
+                    </li>
+                    <li>
+                        prowadzić analizy statystyczne i rozwiązywać problemy optymalizacyjne z użyciem
+                        specjalistycznych pakietów komputerowych
+                    </li>
+                    <li>
+                        projektować sieci komputerowe i administrować nimi
+                    </li>
+                    <li>
+                        organizować prace zespołu programistów i tworzyć złożone systemy informacyjne
+                    </li>
+                    <li>
+                        identyfikować, tworzyć, użytkować i doskonalić systemy informacyjne zarządzania w
+                        przedsiębiorstwach i instytucjach
+                    </li>
+                    <li>
+                        biegle posługiwać się przynajmniej jednym językiem obcym.
+                    </li>
+                </ul>
+                <hr>
+                <p class="font-weight-bold">Kompetencje społeczne</p>
+                Absolwent studiów drugiego stopnia na kierunku metody ilościowe w ekonomii i systemy informacyjne:
+                <ul>
+                    <li>
+                        rozumie potrzebę i potrafi korzystać z podejścia ilościowego dla lepszego postrzegania, opisu
+                        i analizy otaczającej rzeczywistości ekonomicznej, społecznej, biznesowej
+                    </li>
+                    <li>
+                        jest świadomy odpowiedzialności zawodowej w pracy w podmiotach gospodarczych i instytucjach, w
+                        których wymagane jest stosowanie narzędzi matematycznych, statystycznych, ekonometrycznych i
+                        informatycznych
+                    </li>
+                    <li>
+                        daje przykład etycznych zachowań zawodowych
+                    </li>
+                    <li>
+                        rozumie własną i zbiorową odpowiedzialność za ważne wydarzenia społeczne i polityczne.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" role="tab" id="heading">
+            <h5 class="mb-0"><a href="#collapse6"
+                                data-parent="#accordion" data-toggle="collapse">
+                Międzynarodowe stosunki gospodarcze
+            </a></h5>
+        </div>
+        <div id="collapse6" class="collapse show">
+            <div class="card-block">
+                Studia drugiego stopnia na kierunku międzynarodowe stosunki gospodarcze umożliwiają zdobycie
+                zaawansowanej wiedzy z zakresu ekonomii międzynarodowej i dyscyplin komplementarnych oraz rozwijają
+                umiejętności przydatne do prowadzenia działalności zawodowej na stanowiskach analitycznych i
+                kierowniczych w instytucjach i organach administracji publicznej zorientowanych na współpracę z
+                zagranicą, w organizacjach międzynarodowych, w przedsiębiorstwach, w tym w korporacjach
+                międzynarodowych, a także do prowadzenia na własny rachunek działalności gospodarczej, której zakres
+                obejmuje rynki zagraniczne. Ponadto przygotowują one do podejmowania studiów trzeciego stopnia.
+                <hr>
+                <p class="font-weight-bold">Wiedza</p>
+                Absolwent studiów drugiego stopnia na kierunku międzynarodowe stosunki gospodarcze ma zaawansowaną
+                wiedzę:
+                <ul>
+                    <li>
+                        wiedzę na temat ekonometrycznych metod analizy danych ekonomicznych
+                    </li>
+                    <li>
+                        wiedzę na temat procesów globalizacji i regionalizacji
+                    </li>
+                    <li>
+                        wiedzę na temat międzynarodowych rynków finansowych
+                    </li>
+                    <li>
+                        wiedzę na temat kulturowych uwarunkowań biznesu międzynarodowego
+                    </li>
+                    <li>
+                        wiedzę na temat wybranych funkcji przedsiębiorstw działających w skali międzynarodowej
+                    </li>
+                    <li>
+                        pogłębioną wiedzę na temat konkurencyjności i innowacyjności gospodarek oraz przedsiębiorstw
+                    </li>
+                    <li>
+                        rozeznanie w najnowszych publikacjach z zakresu tematyki kierunku.
+                    </li>
+                </ul>
+                <hr>
+                <p class="font-weight-bold">Umiejętności</p>
+                Absolwent studiów drugiego stopnia na kierunku międzynarodowe stosunki gospodarcze potrafi:
+                <ul>
+                    <li>
+                        wykorzystać wiedzę w pracy zawodowej
+                    </li>
+                    <li>
+                        stosować odpowiednio dobrany aparat analityczny w procesie badania problemów ekonomicznych o
+                        charakterze międzynarodowym
+                    </li>
+                    <li>
+                        oceniać konkurencyjność gospodarki (kraju, regionu), a także wskazywać bariery rozwojowe
+                    </li>
+                    <li>
+                        zaplanować i zrealizować zadanie badawcze lub ekspertyzę dotyczące gospodarczej problematyki
+                        międzynarodowej
+                    </li>
+                    <li>
+                        dostrzec nowy problem badawczy lub zawodowy i poddać go profesjonalnej analizie
+                    </li>
+                    <li>
+                        logicznie wyciągać wnioski oraz formułować sądy na podstawie danych z różnych źródeł, również w
+                        sytuacji niepełnej informacji
+                    </li>
+                    <li>
+                        komunikować się ze specjalistami w swojej dziedzinie, a także z osobami z różnych środowisk
+                        społecznozawodowych
+                    </li>
+                    <li>
+                        podejmować decyzje kierownicze w międzynarodowym otoczeniu
+                    </li>
+                    <li>
+                        sprawnie działać w warunkach stresu i pod presją czasu
+                    </li>
+                    <li>
+                        samodzielnie ukierunkować swoje dalszy proces samokształcenia
+                    </li>
+                    <li>
+                        biegle posługiwać się przynajmniej jednym językiem obcym.
+                    </li>
+                </ul>
+                <hr>
+                <p class="font-weight-bold">Kompetencje społeczne</p>
+                Absolwent studiów drugiego stopnia na kierunku międzynarodowe stosunki gospodarcze:
+                <ul>
+                    <li>
+                        wykazuje akceptację i zrozumienie obcych kultur
+                    </li>
+                    <li>
+                        wykazuje się przedsiębiorczością
+                    </li>
+                    <li>
+                        daje przykład etycznych zachowań zawodowych
+                    </li>
+                    <li>
+                        czuje odpowiedzialność za działania własne i współpracowników
+                    </li>
+                    <li>
+                        ma świadomość pełnionej roli zawodowej i społecznej
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" role="tab" id="heading">
+            <h5 class="mb-0"><a href="#collapse7"
+                                data-parent="#accordion" data-toggle="collapse">
+                Zarządzanie
+            </a></h5>
+        </div>
+        <div id="collapse7" class="collapse">
+            <div class="card-block">
+                Studia drugiego stopnia na kierunku zarządzanie dostarczają wiedzy teoretycznej i praktycznej z zakresu
+                nauk
+                o zarządzaniu i nauk pokrewnych dotyczącej istoty, prawidłowości i problemów funkcjonowania różnych
+                organizacji. Studia te rozwijają kompetencje niezbędne do podjęcia pracy zawodowej na stanowiskach
+                specjalistycznych i kierowniczych średniego i wyższego szczebla, doradców w przedsiębiorstwach, grupach
+                kapitałowych, instytucjach non profit oraz w jednostkach administracji państwowej i samorządowej różnych
+                szczebli, a także do prowadzenia własnej działalności gospodarczej. Dają one dobre podstawy do
+                samodzielnego
+                prowadzenia działalności badawczej i przygotowują do podjęcia studiów trzeciego stopnia.
+                <hr>
+                <p class="font-weight-bold">Wiedza</p>
+                Absolwent studiów drugiego stopnia na kierunku zarządzanie ma zaawansowaną wiedzę:
+                <ul>
+                    <li>
+                        ma wiedzę dotyczącą złożonych procesów i zjawisk zachodzących w organizacjach i otaczającym je
+                        świecie
+                    </li>
+                    <li>
+                        ma wiedzę o najlepszych praktykach z zakresu zarządzania w dziedzinach objętych programem
+                        studiów
+                    </li>
+                    <li>
+                        zna metodykę prowadzenia prac badawczych
+                    </li>
+                    <li>
+                        ma wiedzę umożliwiającą rozpoznawanie, diagnozowanie i rozwiązywanie problemów związanych z
+                        funkcjami i procesami zarządzania: planowaniem, organizowaniem, motywowaniem, kontrolą i
+                        koordynacją.
+                    </li>
+                </ul>
+                <hr>
+                <p class="font-weight-bold">Umiejętności</p>
+                Absolwent studiów drugiego stopnia na kierunku zarządzanie potrafi:
+                <ul>
+                    <li>
+                        potrafi prowadzić samodzielnie działalność badawczą i kierować nią
+                    </li>
+                    <li>
+                        ma umiejętność prowadzenia działalności zawodowej w wymiarze krajowym i zagranicznym
+                    </li>
+                    <li>
+                        potrafi docierać do źródeł wiedzy i korzystać z nich, a także przyswajać fakty dotyczące
+                        zarządzania,
+                    </li>
+                    <li>
+                        umie logicznie myśleć, analizować i przeprowadzać syntezę
+                    </li>
+                    <li>
+                        ma umiejętność adaptacji do zmiennych wymagań otoczenia i środowiska pracy
+                    </li>
+                    <li>
+                        potrafi krytycznie analizować, interpretować i oceniać zjawiska i procesy zarządzania w różnej
+                        skali
+                    </li>
+                    <li>
+                        umie formułować problemy projektowe, a także planować i kontrolować realizację projektów i
+                        programów oraz zarządzać portfelem projektów
+                    </li>
+                    <li>
+                        potrafi ocenić wpływ otoczenia na zjawiska i procesy zarządzania oraz przygotowywać i podejmować
+                        decyzje zarządcze, zwłaszcza strategiczne
+                    </li>
+                    <li>
+                        ma umiejętność i odwagę podejmować decyzje i planować w skali przedsiębiorstw i instytucji
+                        działania o innym charakterze (projektowanie systemów organizacji i zarządzania, kierowanie
+                        zespołami, prowadzenie negocjacji)
+                    </li>
+                    <li>
+                        ma umiejętność zarządzania strategicznego oraz konstruktywnego uczestniczenia w organizacyjnych
+                        procesach podejmowania decyzji na wszystkich szczeblach zarządzania
+                    </li>
+                    <li>
+                        potrafi dokonać holistycznej oceny sytuacji oraz podejmować decyzje o charakterze taktycznym i
+                        strategicznym
+                    </li>
+                    <li>
+                        biegle posługuje się przynajmniej jednym językiem obcym.
+                    </li>
+                </ul>
+                <hr>
+                <p class="font-weight-bold">Kompetencje społeczne</p>
+                Absolwent studiów drugiego stopnia na kierunku zarządzanie:
+                <ul>
+                    <li>
+                        umiejętność pracy zespołowej i kierowania zespołami (w tym zespołami zadaniowymi) oraz
+                        skutecznego
+                        komunikowania się, negocjowania i przekonywania
+                    </li>
+                    <li>
+                        zdolność do aktywnego uczestnictwa i kształtowania demokratycznego społeczeństwa
+                    </li>
+                    <li>
+                        świadomość etyki i odpowiedzialności związanej z wykonywanym zawodem
+                    </li>
+                    <li>
+                        zdolność skutecznego komunikowania się, negocjowania i przekonywania oraz pracy w zespole
+                    </li>
+                    <li>
+                        wyważone i kompetentne opiniowanie i ocenianie pracy innych
+                    </li>
+                    <li>
+                        nawyk samodzielnej pracy, samokształcenia oraz aktualizowania i kumulacji wiedzy z różnych
+                        źródeł
+                    </li>
+                    <li>
+                        umiejętność sprawnego działania w warunkach stresu i pod presją czasu.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div style="margin-top:500px;"></div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
 </body>
 </html>
