@@ -36,6 +36,7 @@ public class User {
     @JoinTable(name = "student_basket", joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "subject_id"))
     private Set<Course> courseBasket = new LinkedHashSet<>();
+    private boolean basketAccepted;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -164,6 +165,14 @@ public class User {
 
     public void setPesel(String pesel) {
         this.pesel = pesel;
+    }
+
+    public boolean isBasketAccepted() {
+        return basketAccepted;
+    }
+
+    public void setBasketAccepted(boolean basketAccepted) {
+        this.basketAccepted = basketAccepted;
     }
 
     @Override

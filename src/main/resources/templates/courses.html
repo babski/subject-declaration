@@ -110,13 +110,18 @@
                         <td th:text="${course.day.getValue() + ' ' + course.startTime + '-' + course.endTime}"></td>
                         <td th:text="${course.subject.isComplex()} and ${course.type == T(pl.mbab.subjectdeclaration.model.subject.CourseType).CLASSES} ? '' : ${course.subject.getEcts()}"></td>
                         <td>
-                            <form action="#" th:action="@{'/addcourse/'}" th:object="${course}" method="post">
+                            <span th:if="${!user.basketAccepted}">
+                                <form action="#" th:action="@{'/addcourse/'}" th:object="${course}" method="post">
                                 <input type="hidden" id="courseId" name="courseId" th:value="${course.id}"/>
                                 <input type="submit" class="btn btn-outline-primary btn-sm" value="Dodaj"/>
                             </form>
+                            </span>
+                            <span th:unless="${!user.basketAccepted}">
+                                <button class="btn btn-outline-primary btn-sm disabled" type="button">Dodaj</button>
+                            </span>
                         </td>
                     </tr>
-                    </tbody>
+                                        </tbody>
                 </table>
             </div>
         </div>

@@ -6,6 +6,7 @@ import pl.mbab.subjectdeclaration.model.subject.CourseType;
 import pl.mbab.subjectdeclaration.repository.CourseRepository;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -71,4 +72,13 @@ public class CourseServiceImpl implements CourseService {
 
     }
 
+    @Override
+    public String findCoursebySubSignature(String signature, List<Course> courses) {
+        for (Course course:courses) {
+            if (course.getSubject().getSignature().equals(signature)){
+                return course.getSubject().getName();
+            }
+        }
+        throw new RuntimeException("Nie istnieje przedmiot o wskazanej sygnataurze.");
+    }
 }

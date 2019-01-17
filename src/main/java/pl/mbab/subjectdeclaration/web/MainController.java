@@ -1,5 +1,6 @@
 package pl.mbab.subjectdeclaration.web;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +9,7 @@ import pl.mbab.subjectdeclaration.model.User;
 import pl.mbab.subjectdeclaration.service.CourseService;
 import pl.mbab.subjectdeclaration.service.UserService;
 
+@Slf4j
 @Controller
 public class MainController {
 
@@ -44,8 +46,4 @@ public class MainController {
         return "user/index";
     }
 
-    @GetMapping("/blabla")
-    public String blabla() {
-        return "blabla";
-    }
 }

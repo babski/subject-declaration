@@ -28,11 +28,14 @@ public class CourseController {
     }
 
     @GetMapping("/courses/all")
-    public String listCourses(Model model) {
+    public String listCourses(Model model, Authentication authentication) {
+        String login = authentication.getName();
+        User user = userService.findByEmail(login);
         Set<Course> courses = courseService.getAllCourses()
                 .stream().filter(x -> !x.getLecturer().getSignature().equals("0000"))
                 .collect(Collectors.toSet());
         model.addAttribute("courses", courses);
+        model.addAttribute("user", user);
         return "courses";
     }
 
@@ -43,6 +46,7 @@ public class CourseController {
         User user = userService.findByEmail(login);
         Set<Course> courses = userService.getFieldCourses(login, group1);
         model.addAttribute("courses", courses);
+        model.addAttribute("user", user);
         return "fielda";
     }
 
@@ -53,6 +57,7 @@ public class CourseController {
         User user = userService.findByEmail(login);
         Set<Course> courses = userService.getFieldCourses(login, group1);
         model.addAttribute("courses", courses);
+        model.addAttribute("user", user);
         return "fieldb";
     }
 
@@ -89,7 +94,7 @@ public class CourseController {
         String login = authentication.getName();
         log.debug(login);
         userService.validate(login);
-        return "index";
+        return "success";
     }
 
     @PostMapping("/deletecourse")

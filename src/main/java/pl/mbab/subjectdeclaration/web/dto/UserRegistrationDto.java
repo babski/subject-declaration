@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 
 @FieldMatch.List({
         @FieldMatch(first = "password", second = "confirmPassword", message = "Pola haseł powinny do siebie pasować"),
-        @FieldMatch(first = "email", second = "confirmEmail", message = "Pola email powiiny do siebie pasować")
+        @FieldMatch(first = "email", second = "confirmEmail", message = "Pola email powinny do siebie pasować")
 })
 @Getter
 @Setter

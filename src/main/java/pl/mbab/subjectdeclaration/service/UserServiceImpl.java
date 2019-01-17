@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.mbab.subjectdeclaration.exception.ComplexSubjectException;
 import pl.mbab.subjectdeclaration.model.Role;
 import pl.mbab.subjectdeclaration.model.User;
 import pl.mbab.subjectdeclaration.model.student.Semester;
@@ -181,7 +182,10 @@ public class UserServiceImpl implements UserService {
             List<Course> coursesPerSignature = courses.get(signature);
             long number = coursesPerSignature.stream().count();
             if(number != 2L) {
-                throw new RuntimeException("Do przedmiotu o sygnaturze" + signature + "brakuje wykładu, ćwiczeń");
+//                throw new ComplexSubjectException("Dla przedmiotu du/ćwiczeń");
+                throw new ComplexSubjectException("Dla przedmiotu " +
+                        courseService.findCoursebySubSignature(signature, coursesPerSignature)+
+                        " o sygnaturze " + signature + " nie dodano wykładu/ćwiczeń");
             }
         }
     }
@@ -230,6 +234,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void validate(String login) {
         User user = findByEmail(login);
         checkEcts(user);
@@ -237,6 +242,8 @@ public class UserServiceImpl implements UserService {
         checkFieldCourses(user, false);
         checkCompulsoryCourses(user);
         checkComplexCourses(user);
+        user.setBasketAccepted(true);
+        userRepository.save(user);
 
 //        Set<Course> b1 = basket.stream()
 //        Set<Course> b2;

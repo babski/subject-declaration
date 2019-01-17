@@ -30,10 +30,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item px-2">
-                    <a href="../" class="nav-link">Koszyk</a>
+                    <a href="index.html" class="nav-link active">Koszyk</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link active dropdown-toggle" data-toggle="dropdown">Dodaj przedmiot</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dodaj przedmiot</a>
                     <div class="dropdown-menu">
                         <a href="/../../courses/fielda" class="dropdown-item">kierunkowy</a>
                         <a href="/../../courses/fieldb" class="dropdown-item">zw. z kierunkiem</a>
@@ -71,73 +71,17 @@
     </div>
 </nav>
 
-<header id="main-header" class="py-2 bg-success text-white">
+<header id="main-header" class="py-2 bg-primary text-white">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h1><i class="fas fa-cart-plus"></i> Dodaj przedmiot</h1>
+                <h1><i class="fas fa-shopping-cart"></i> Sukces</h1>
             </div>
         </div>
     </div>
 </header>
+<h1>Sukces!</h1>
+<p>Proces deklaracji przedmiotów zakończony powodzeniem! Możesz się wylogować.</p>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Dodaj przedmiot kierunkowy</h4>
-                </div>
-                <input class="form-control" id="myInput" type="text" placeholder="Szukaj...">
-                <table class="table table-sm table-striped table-hover" style="font-size: 12px">
-                    <thead class="thead-inverse">
-                    <tr>
-                        <th>Sygnatura</th>
-                        <th>Przedmiot</th>
-                        <th>Typ zajęć</th>
-                        <th>Prowadzący</th>
-                        <th>Termin</th>
-                        <th>Pkt ECTS</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody id="myTable">
-                    <tr style="vertical-align: middle" th:each="course: ${courses}">
-                        <td th:text="${course.subject.getSignature() +'-'+course.lecturer.getSignature()}">Sygnatura
-                        </td>
-                        <td th:text="${course.subject.getName()}">Przedmiot</td>
-                        <td th:text="${course.type.getValue()}">Typ zajęć</td>
-                        <td th:text="${course.lecturer.getName()}">Wykładowca</td>
-                        <td th:text="${course.day.getValue() + ' ' + course.startTime + '-' + course.endTime}">Termin
-                        </td>
-                        <td th:text="${course.subject.isComplex()} and ${course.type == T(pl.mbab.subjectdeclaration.model.subject.CourseType).CLASSES} ? '' : ${course.subject.getEcts()}"></td>
-                        <td>
-                            <span th:if="${!user.basketAccepted}">
-                               <form action="#" th:action="@{'/addcourse/'}" th:object="${course}" method="post">
-                                <input type="hidden" id="courseId" name="courseId" th:value="${course.id}"/>
-                                <input type="submit" class="btn btn-outline-primary btn-sm" value="Dodaj"/>
-                            </form>
-                            </span>
-                            <span th:unless="${!user.basketAccepted}">
-                                <button class="btn btn-outline-primary btn-sm disabled" type="button">Dodaj</button>
-                            </span>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-    $(document).ready(function () {
-        $("#myInput").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
-            $("#myTable tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-    });
-</script>
 </body>
 </html>
