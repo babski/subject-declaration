@@ -5,7 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import pl.mbab.subjectdeclaration.model.User;
+import pl.mbab.subjectdeclaration.model.user.User;
 import pl.mbab.subjectdeclaration.service.CourseService;
 import pl.mbab.subjectdeclaration.service.UserService;
 
@@ -23,11 +23,6 @@ public class MainController {
 
     @GetMapping("/")
     public String root(Authentication authentication, Model model) {
-//        String login = authentication.getName();
-//        User user = userService.findByEmail(login);
-//        if(user.getCourseBasket()== null) {
-//            userService.addCompulsoryCourse(login);
-//        }
         String login = authentication.getName();
         User user = userService.findByEmail(login);
         double ects = courseService.countEcts(user.getCourseBasket());

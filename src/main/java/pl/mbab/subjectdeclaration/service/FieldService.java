@@ -1,11 +1,11 @@
 package pl.mbab.subjectdeclaration.service;
 
 
-import pl.mbab.subjectdeclaration.model.student.Field;
+import pl.mbab.subjectdeclaration.model.user.Field;
 
-import java.util.Set;
+import java.util.List;
 
 public interface FieldService {
 
-    Set<Field> getAllFields();
+    List<Field> getAllFields();
 }

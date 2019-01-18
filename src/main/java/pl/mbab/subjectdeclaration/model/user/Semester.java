@@ -1,4 +1,4 @@
-package pl.mbab.subjectdeclaration.model.student;
+package pl.mbab.subjectdeclaration.model.user;
 
 public enum Semester {
     I(new String[]{"210100", "210110"}, 16.5, 0.0),

@@ -1,4 +1,4 @@
-package pl.mbab.subjectdeclaration.model.student;
+package pl.mbab.subjectdeclaration.model.user;
 
 public enum Gender {
     FEMALE ("kobieta"),

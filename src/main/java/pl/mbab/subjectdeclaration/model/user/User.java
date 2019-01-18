@@ -1,14 +1,11 @@
-package pl.mbab.subjectdeclaration.model;
+package pl.mbab.subjectdeclaration.model.user;
 
-import pl.mbab.subjectdeclaration.model.student.Field;
-import pl.mbab.subjectdeclaration.model.student.Gender;
-import pl.mbab.subjectdeclaration.model.student.Semester;
 import pl.mbab.subjectdeclaration.model.subject.Course;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
@@ -35,7 +32,7 @@ public class User {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "student_basket", joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "subject_id"))
-    private Set<Course> courseBasket = new LinkedHashSet<>();
+    private List<Course> courseBasket = new ArrayList<>();
     private boolean basketAccepted;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -66,7 +63,7 @@ public class User {
     }
 
     public User(String firstName, String lastName, String email, String password, Field field, Gender gender,
-                String pesel, Semester semester, Set<Course> courseBasket, Collection<Role> roles) {
+                String pesel, Semester semester, List<Course> courseBasket, Collection<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -151,11 +148,11 @@ public class User {
         this.gender = gender;
     }
 
-    public Set<Course> getCourseBasket() {
+    public List<Course> getCourseBasket() {
         return courseBasket;
     }
 
-    public void setCourseBasket(Set<Course> courseBasket) {
+    public void setCourseBasket(List<Course> courseBasket) {
         this.courseBasket = courseBasket;
     }
 

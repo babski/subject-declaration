@@ -2,7 +2,7 @@ package pl.mbab.subjectdeclaration.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.mbab.subjectdeclaration.model.User;
+import pl.mbab.subjectdeclaration.model.user.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {

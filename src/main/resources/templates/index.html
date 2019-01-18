@@ -131,17 +131,17 @@
                         <td></td>
                         <td class="font-weight-bold text-right">Razem:</td>
                         <td class="font-weight-bold">
-                            <span th:if="${ects} >= ${T(pl.mbab.subjectdeclaration.model.student.Semester).ectsMin} and ${ects} <= ${T(pl.mbab.subjectdeclaration.model.student.Semester).ectsMax}"
+                            <span th:if="${ects} >= ${T(pl.mbab.subjectdeclaration.model.user.Semester).ectsMin} and ${ects} <= ${T(pl.mbab.subjectdeclaration.model.user.Semester).ectsMax}"
                                   style="color: green" th:text="${ects}"></span>
-                            <span th:if="${ects} < ${T(pl.mbab.subjectdeclaration.model.student.Semester).ectsMin} or ${ects} > ${T(pl.mbab.subjectdeclaration.model.student.Semester).ectsMax}"
+                            <span th:if="${ects} < ${T(pl.mbab.subjectdeclaration.model.user.Semester).ectsMin} or ${ects} > ${T(pl.mbab.subjectdeclaration.model.user.Semester).ectsMax}"
                                   style="color: red" th:text="${ects}"></span>
                         </td>
                         <td align="center">
-                            <span th:if="(${ects} < ${T(pl.mbab.subjectdeclaration.model.student.Semester).ectsMin} or ${ects} > ${T(pl.mbab.subjectdeclaration.model.student.Semester).ectsMax}) and ${!user.basketAccepted}">
+                            <span th:if="(${ects} < ${T(pl.mbab.subjectdeclaration.model.user.Semester).ectsMin} or ${ects} > ${T(pl.mbab.subjectdeclaration.model.user.Semester).ectsMax}) and ${!user.basketAccepted}">
                                 <button class="btn btn-outline-success btn-sm disabled" data-toggle="tooltip"
                                         data-placement="bottom" title="Aby zatwierdzić deklarację koszyk powinien zawierać 30-70 pkt ECTS"><i class="fas fa-check"></i></button>
                             </span>
-                            <span th:if="${ects} >= ${T(pl.mbab.subjectdeclaration.model.student.Semester).ectsMin} and ${ects} <= ${T(pl.mbab.subjectdeclaration.model.student.Semester).ectsMax} and ${!user.basketAccepted}">
+                            <span th:if="${ects} >= ${T(pl.mbab.subjectdeclaration.model.user.Semester).ectsMin} and ${ects} <= ${T(pl.mbab.subjectdeclaration.model.user.Semester).ectsMax} and ${!user.basketAccepted}">
 
                             <button class="btn btn-outline-success btn-sm" data-toggle="modal"
                                     data-target="#myModal"><i class="fas fa-check"></i></button>

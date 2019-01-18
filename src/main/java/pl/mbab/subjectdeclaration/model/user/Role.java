@@ -1,4 +1,4 @@
-package pl.mbab.subjectdeclaration.model;
+package pl.mbab.subjectdeclaration.model.user;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -67,7 +67,7 @@
                      th:classappend="${#fields.hasErrors('gender')}? 'has-error':''">
                     <label for="gender" class="form-check-label">Płeć</label><br>
                     <div class="form-check-inline"
-                         th:each="gender : ${T(pl.mbab.subjectdeclaration.model.student.Gender).values()}">
+                         th:each="gender : ${T(pl.mbab.subjectdeclaration.model.user.Gender).values()}">
                         <label for="gender" class="form-check-label">
                             <input type="radio" id="gender" class="form-check-input" th:field="*{gender}"
                                    th:value="${gender}" th:text="${gender.value}" />
@@ -80,7 +80,7 @@
                 <div class="form-group">
                     <label for="semester" class="control-label">Semestr</label>
                     <select class="form-control" id="semester" th:field="*{semester}">
-                        <option th:each="semester : ${T(pl.mbab.subjectdeclaration.model.student.Semester).values()}"
+                        <option th:each="semester : ${T(pl.mbab.subjectdeclaration.model.user.Semester).values()}"
                                 th:value="${semester}"
                                 th:text="${semester}">
                         </option>

@@ -5,9 +5,8 @@ import pl.mbab.subjectdeclaration.model.subject.Course;
 import pl.mbab.subjectdeclaration.model.subject.CourseType;
 import pl.mbab.subjectdeclaration.repository.CourseRepository;
 
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -19,44 +18,44 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Set<Course> getAllCourses() {
-        Set<Course> result = new LinkedHashSet<>();
+    public List<Course> getAllCourses() {
+        List<Course> result = new ArrayList<>();
         courseRepository.findAll().iterator().forEachRemaining(result::add);
         return result;
     }
 
     @Override
-    public Set<Course> findCourseBySignature() {
+    public List<Course> findCourseBySignature() {
         return null;
     }
 
     @Override
-    public Set<Course> findCourseByName() {
+    public List<Course> findCourseByName() {
         return null;
     }
 
     @Override
-    public Set<Course> findCourseByLecturerId() {
+    public List<Course> findCourseByLecturerId() {
         return null;
     }
 
     @Override
-    public Set<Course> findCourseByLecturerName() {
+    public List<Course> findCourseByLecturerName() {
         return null;
     }
 
     @Override
-    public Set<Course> findFieldCourses() {
+    public List<Course> findFieldCourses() {
         return null;
     }
 
     @Override
-    public Set<Course> addCourse(Long id) {
+    public List<Course> addCourse(Long id) {
         return null;
     }
 
     @Override
-    public Set<Course> deleteCourse(Long id) {
+    public List<Course> deleteCourse(Long id) {
         return null;
     }
 
@@ -66,7 +65,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public double countEcts(Set<Course> courseSet) {
+    public double countEcts(List<Course> courseSet) {
         return courseSet.stream().filter(x -> !(x.getSubject().isComplex() == true && x.getType() == CourseType.CLASSES))
                 .mapToDouble(x -> x.getSubject().getEcts()).sum();
 

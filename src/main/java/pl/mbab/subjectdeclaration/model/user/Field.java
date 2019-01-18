@@ -1,4 +1,4 @@
-package pl.mbab.subjectdeclaration.model.student;
+package pl.mbab.subjectdeclaration.model.user;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -6,7 +6,7 @@ import lombok.Setter;
 import pl.mbab.subjectdeclaration.model.subject.FieldSubject;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Setter
 @Getter
@@ -22,6 +22,6 @@ public class Field {
 
     @OneToMany(mappedBy = "field")
     @Column(name = "field_subject_list")
-    private Set<FieldSubject> fieldSubjects;
+    private List<FieldSubject> fieldSubjects;
 
 }

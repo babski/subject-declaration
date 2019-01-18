@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.mbab.subjectdeclaration.model.student.Field;
+import pl.mbab.subjectdeclaration.model.user.Field;
 
 import javax.persistence.*;
 

@@ -8,12 +8,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.mbab.subjectdeclaration.exception.ComplexSubjectException;
-import pl.mbab.subjectdeclaration.model.Role;
-import pl.mbab.subjectdeclaration.model.User;
-import pl.mbab.subjectdeclaration.model.student.Semester;
+import pl.mbab.subjectdeclaration.exception.*;
 import pl.mbab.subjectdeclaration.model.subject.Course;
 import pl.mbab.subjectdeclaration.model.subject.FieldSubject;
+import pl.mbab.subjectdeclaration.model.user.Role;
+import pl.mbab.subjectdeclaration.model.user.Semester;
+import pl.mbab.subjectdeclaration.model.user.User;
 import pl.mbab.subjectdeclaration.repository.CourseRepository;
 import pl.mbab.subjectdeclaration.repository.UserRepository;
 import pl.mbab.subjectdeclaration.web.dto.UserRegistrationDto;
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
         if (user == null) {
-            throw new UsernameNotFoundException("Invalid username or password.");
+            throw new UsernameNotFoundException("Nieprawidłowa nazwa użytkownika lub hasło.");
         }
         return new org.springframework.security.core.userdetails.User(user.getEmail(),
                 user.getPassword(),
@@ -80,17 +80,20 @@ public class UserServiceImpl implements UserService {
     public void addCourse(String login, Long courseId) {
         User user = findByEmail(login);
         Course course = courseService.findCourseById(courseId);
-        Set<Course> addedCourses = user.getCourseBasket();
+        List<Course> addedCourses = user.getCourseBasket();
         for (Course addedCourse : addedCourses) {
             if (addedCourse.getSubject().getSignature().equals(course.getSubject().getSignature()) &&
                     addedCourse.getType().equals(course.getType())) {
-                throw new RuntimeException("Przedmiot " + course.getSubject().getName() +
-                        "został już dodany do koszyka");
+                throw new CourseOverrideException("Przedmiot " + course.getSubject().getName() +
+                        " o sygnaturze " + course.getSubject().getSignature() +
+                        " został już dodany do koszyka.");
             }
             if (addedCourse.getDay().equals(course.getDay()) &&
                     addedCourse.getStartTime().equals(course.getStartTime())) {
-                throw new RuntimeException("Przedmiot " + course.getSubject().getName() +
-                        " koliduje terminem zajęć z przedmiotem " + addedCourse.getSubject().getName());
+                throw new CourseCollisionException("Przedmiot " + course.getSubject().getName() +
+                        " o sygnaturze " + course.getSubject().getSignature() + " koliduje terminem zajęć" +
+                        " z przedmiotem "+ addedCourse.getSubject().getName() + " o sygnaturze "
+                        + addedCourse.getSubject().getSignature() + ".");
             }
         }
         addedCourses.add(course);
@@ -101,12 +104,12 @@ public class UserServiceImpl implements UserService {
     public void deleteCourse(String login, Long courseId) {
         User user = findByEmail(login);
         Course course = courseService.findCourseById(courseId);
-        Set<Course> userCourses = user.getCourseBasket();
+        List<Course> userCourses = user.getCourseBasket();
         userCourses.remove(course);
     }
 
     @Override
-    public Set<Course> showBasket(String login) {
+    public List<Course> showBasket(String login) {
         User user = findByEmail(login);
         return user.getCourseBasket();
     }
@@ -114,31 +117,31 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void addCompulsoryCourse(User user) {
-        //        user.setCourseBasket(new LinkedHashSet<>());
-        Set<Course> userCourses = user.getCourseBasket();
-        userCourses.add(courseRepository.findById(Long.valueOf(user.getSemester().ordinal() + 1)).orElse(null));
+        List<Course> userCourses = user.getCourseBasket();
+        userCourses.add(courseRepository.findById(Long.valueOf(user.getSemester().ordinal() + 1))
+                .orElse(null));
     }
 
     @Override
-    public Set<Course> getFieldCourses(String login, boolean group1) {
+    public List<Course> getFieldCourses(String login, boolean group1) {
         User user = findByEmail(login);
-        Set<FieldSubject> allSubjects = user.getField().getFieldSubjects();
+        List<FieldSubject> allSubjects = user.getField().getFieldSubjects();
         Set<String> newString = allSubjects.stream()
                 .filter(s -> s.isRequired() == group1)
                 .map(s -> s.getSubject().getSignature())
                 .collect(Collectors.toSet());
-        Set<Course> courses = courseService.getAllCourses();
-        Set<Course> fieldCourses = courses.stream()
+        List<Course> courses = courseService.getAllCourses();
+        List<Course> fieldCourses = courses.stream()
                 .filter(s -> newString.contains(s.getSubject().getSignature()))
-                .sorted((s, t) -> s.getSubject().getSignature().compareTo(t.getSubject().getSignature()))
-                .collect(Collectors.toSet());
+                .sorted(Comparator.comparing(s -> s.getSubject().getSignature()))
+                .collect(Collectors.toList());
 
         return fieldCourses;
     }
 
     public Course[][] timetable(String login) {
         User user = findByEmail(login);
-        Set<Course> basket = user.getCourseBasket();
+        List<Course> basket = user.getCourseBasket();
         Course[][] coursesInBasket = new Course[7][5];
         for (Course singleCourse : basket) {
             coursesInBasket[parser(singleCourse.getStartTime())]
@@ -156,21 +159,21 @@ public class UserServiceImpl implements UserService {
         throw new RuntimeException("Nieprawidłowa godzina rozpoczęcia zajęć.");
     }
 
-    public void checkEcts(User user){
-        Set<Course> basket = user.getCourseBasket();
+    public void checkEcts(User user) {
+        List<Course> basket = user.getCourseBasket();
         double ectsInBasket = courseService.countEcts(basket);
-        if(ectsInBasket < Semester.ectsMin) {
-            throw new RuntimeException("Za mało przedmiotów dodanych do koszyka. Dodaj jeszcze przedmioty" +
-                    " o wartości co najmniej " +(Semester.ectsMin - ectsInBasket) + "pkt ECTS");
+        if (ectsInBasket < Semester.ectsMin) {
+            throw new BasketPointsException("Za mało przedmiotów dodanych do koszyka. Dodaj jeszcze " +
+                    "przedmioty o wartości co najmniej " + (Semester.ectsMin - ectsInBasket) + " pkt ECTS");
         }
-        if(ectsInBasket > Semester.ectsMax) {
-            throw new RuntimeException("Za dużo przedmiotów dodanych do koszyka. Usuń z koszyka przedmioty" +
-                    " o wartości co najmniej " +(ectsInBasket - Semester.ectsMax) + "pkt ECTS");
+        if (ectsInBasket > Semester.ectsMax) {
+            throw new BasketPointsException("Za dużo przedmiotów dodanych do koszyka. Usuń z koszyka " +
+                    "przedmioty o wartości co najmniej " + (ectsInBasket - Semester.ectsMax) + " pkt ECTS");
         }
     }
 
     public void checkComplexCourses(User user) {
-        Set<Course> basket = user.getCourseBasket();
+        List<Course> basket = user.getCourseBasket();
         Set<Course> newBasket = new HashSet<>(basket);
 
         newBasket = newBasket.stream().filter(course -> course.getSubject().isComplex() == true)
@@ -181,51 +184,51 @@ public class UserServiceImpl implements UserService {
         for (String signature : courses.keySet()) {
             List<Course> coursesPerSignature = courses.get(signature);
             long number = coursesPerSignature.stream().count();
-            if(number != 2L) {
-//                throw new ComplexSubjectException("Dla przedmiotu du/ćwiczeń");
+            if (number != 2L) {
                 throw new ComplexSubjectException("Dla przedmiotu " +
-                        courseService.findCoursebySubSignature(signature, coursesPerSignature)+
+                        courseService.findCoursebySubSignature(signature, coursesPerSignature) +
                         " o sygnaturze " + signature + " nie dodano wykładu/ćwiczeń");
             }
         }
     }
+
     public void checkFieldCourses(User user, boolean group1) {
         String login = user.getEmail();
-        Set<Course> basket = user.getCourseBasket();
-        Set<Course> newBasket = new HashSet<>(basket);
+        List<Course> basket = user.getCourseBasket();
+        List<Course> newBasket = new ArrayList<>(basket);
         Map<String, Course> tempMap = new HashMap<>();
         for (Course course : newBasket) {
             tempMap.put(course.getSubject().getSignature(), course);
         }
-        Set<Course> uniqueSet = tempMap.values().stream().collect(Collectors.toSet());
-        Set<Course> field = getFieldCourses(login, group1);
-//        Set<Course> field2 = getFieldCourses(login, false);
+        List<Course> uniqueSet = tempMap.values().stream().collect(Collectors.toList());
+        List<Course> field = getFieldCourses(login, group1);
 
-        Set<Course> common = uniqueSet.stream().filter(course -> field.contains(course)).collect(Collectors.toSet());
-        if(group1) {
+        List<Course> common = uniqueSet.stream().filter(course -> field.contains(course))
+                .collect(Collectors.toList());
+        if (group1) {
             if (courseService.countEcts(common) < user.getSemester().getField1Ects()) {
-                throw new RuntimeException("Za mało przedmiotów kierunkowych w koszyku. Dodaj jescze przedmioty" +
-                        "kierunkowe o wartości przynajmniej " +
-                        (user.getSemester().getField1Ects() - courseService.countEcts(common)) + " ects.");
+                throw new FieldCoursesException("Za mało przedmiotów kierunkowych w koszyku. Dodaj " +
+                        "jescze przedmioty kierunkowe o wartości przynajmniej " +
+                        (user.getSemester().getField1Ects() - courseService.countEcts(common)) + " ECTS.");
             }
-        }
-        else {
+        } else {
             if (courseService.countEcts(common) < user.getSemester().getField2Ects()) {
-                throw new RuntimeException("Za mało przedmiotów związanych z kierunkiem w koszyku." +
+                throw new FieldCoursesException("Za mało przedmiotów związanych z kierunkiem w koszyku." +
                         " Dodaj jescze przedmioty związane z kierunkiem o wartości przynajmniej " +
-                        (user.getSemester().getField2Ects() - courseService.countEcts(common)) + " ects.");
+                        (user.getSemester().getField2Ects() - courseService.countEcts(common)) + " ECTS.");
             }
         }
     }
 
     public void checkCompulsoryCourses(User user) {
-        Set<Course> basket = user.getCourseBasket();
-        Set<Course> newBasket = new HashSet<>(basket);
+        List<Course> basket = user.getCourseBasket();
+        List<Course> newBasket = new ArrayList<>(basket);
         if (user.getSemester().getCompulsorySubjects() != null) {
             String[] compulsory = user.getSemester().getCompulsorySubjects();
             for (String subject : compulsory) {
                 if (!newBasket.stream()
-                        .filter(x -> x.getSubject().getSignature().equals(subject)).findFirst().isPresent()) {
+                        .filter(x -> x.getSubject().getSignature().equals(subject)).findFirst()
+                        .isPresent()) {
                     System.out.println("W koszyku brakuje przedmiotu o sygnaturze " + subject);
 
                 }
@@ -245,35 +248,11 @@ public class UserServiceImpl implements UserService {
         user.setBasketAccepted(true);
         userRepository.save(user);
 
-//        Set<Course> b1 = basket.stream()
-//        Set<Course> b2;
-//        for (Course course : basket) {
-//            if (course.getSubject().isComplex())
-//        }
-
-   /*     Map<Tuple, List<BlogPost>> postsPerTypeAndAuthor = posts.stream()
-  .collect(groupingBy(post -> new Tuple(post.getType(), post.getAuthor()))); */
-
-//        Map<String, Set<Course>> coursePerSignature = basket.stream().collect(
-//                Collectors.groupingBy(Course::getSubject        ));
-
-
-//        Map<String, List<Course>> courses = basket.stream()
-//                .collect(Collectors.groupingBy(course -> course.getSubject().getSignature()));
-//
-//        for (String signature : courses.keySet()) {
-//            List<Course> coursesPerSignature = courses.get(signature);
-//            long number = coursesPerSignature.stream()
-//                    .filter(course -> course.getSubject().isComplex() == true).count();
-//            if(number != 2L) {
-//                throw new RuntimeException("Do przedmiotu o sygnaturze" + signature + "brakuje wykładu, ćwiczeń");
-//            }
-//        }
-
-
-
     }
+
+
 }
+
 
 
 

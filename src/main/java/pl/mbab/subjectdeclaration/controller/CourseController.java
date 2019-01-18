@@ -7,11 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pl.mbab.subjectdeclaration.model.User;
 import pl.mbab.subjectdeclaration.model.subject.Course;
+import pl.mbab.subjectdeclaration.model.user.User;
 import pl.mbab.subjectdeclaration.service.CourseService;
 import pl.mbab.subjectdeclaration.service.UserService;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -44,7 +45,7 @@ public class CourseController {
         String login = authentication.getName();
         boolean group1 = true;
         User user = userService.findByEmail(login);
-        Set<Course> courses = userService.getFieldCourses(login, group1);
+        List<Course> courses = userService.getFieldCourses(login, group1);
         model.addAttribute("courses", courses);
         model.addAttribute("user", user);
         return "fielda";
@@ -55,7 +56,7 @@ public class CourseController {
         String login = authentication.getName();
         boolean group1 = false;
         User user = userService.findByEmail(login);
-        Set<Course> courses = userService.getFieldCourses(login, group1);
+        List<Course> courses = userService.getFieldCourses(login, group1);
         model.addAttribute("courses", courses);
         model.addAttribute("user", user);
         return "fieldb";

@@ -5,9 +5,9 @@ import lombok.Setter;
 import pl.mbab.subjectdeclaration.constraint.FieldMatch;
 import pl.mbab.subjectdeclaration.constraint.PasswordConstraint;
 import pl.mbab.subjectdeclaration.constraint.PeselConstraint;
-import pl.mbab.subjectdeclaration.model.student.Field;
-import pl.mbab.subjectdeclaration.model.student.Gender;
-import pl.mbab.subjectdeclaration.model.student.Semester;
+import pl.mbab.subjectdeclaration.model.user.Field;
+import pl.mbab.subjectdeclaration.model.user.Gender;
+import pl.mbab.subjectdeclaration.model.user.Semester;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;

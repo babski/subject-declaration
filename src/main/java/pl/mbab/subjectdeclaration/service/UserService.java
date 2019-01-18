@@ -1,11 +1,11 @@
 package pl.mbab.subjectdeclaration.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
-import pl.mbab.subjectdeclaration.model.User;
 import pl.mbab.subjectdeclaration.model.subject.Course;
+import pl.mbab.subjectdeclaration.model.user.User;
 import pl.mbab.subjectdeclaration.web.dto.UserRegistrationDto;
 
-import java.util.Set;
+import java.util.List;
 
 public interface UserService extends UserDetailsService {
 
@@ -17,11 +17,11 @@ public interface UserService extends UserDetailsService {
 
     void deleteCourse(String login, Long courseId);
 
-    Set<Course> showBasket(String login);
+    List<Course> showBasket(String login);
 
     void addCompulsoryCourse(User user);
 
-    Set<Course> getFieldCourses(String login, boolean group1);
+    List<Course> getFieldCourses(String login, boolean group1);
 
     Course[][] timetable(String login);
 
