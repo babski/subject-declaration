@@ -29,6 +29,14 @@ public class CourseController {
         this.userService = userService;
     }
 
+    @GetMapping("/profile")
+    public String showProfile(Model model, Authentication authentication) {
+        String login = authentication.getName();
+        User user = userService.findByEmail(login);
+        model.addAttribute("user", user);
+        return "profile";
+    }
+
     @GetMapping("/courses/all")
     public String listCourses(Model model, Authentication authentication) {
         String login = authentication.getName();

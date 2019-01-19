@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
->
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -19,7 +18,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
             integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
             crossorigin="anonymous"></script>
-    <title>Blogen Admin Area</title>
+    <!--<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>-->
+
+    <title>SD - Profil użytkownika</title>
 </head>
 <body>
 <div th:insert="/navbar"></div>
@@ -34,17 +35,62 @@
     </div>
 </header>
 
-<div class="card text-center">
-    <div class="card-header">
-        Mój profil
-    </div>
-    <div class="card-block">
-        <h4 class="card-title">Moje dane</h4>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, perspiciatis.</p>
-        <a href="#" class="btn btn-danger">Read More</a>
-    </div>
-    <div class="card-footer text-muted">
-        2 Days Ago
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 mx-auto">
+            <div class="card">
+                <div class="card-header text-center">
+                    Mój profil
+                </div>
+                <div class="card-block">
+                    <h4 class="card-title text-center">Moje dane</h4>
+                    <form th:object="${user}">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Imię</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" disabled th:field="*{firstName}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Nazwisko</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" disabled th:field="*{lastName}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">PESEL</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" disabled th:field="*{pesel}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Płeć</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" disabled th:field="*{gender.value}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Semestr</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" disabled th:field="*{semester}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Kierunek</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" disabled th:field="*{field.name}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Email</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" disabled th:field="*{email}">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

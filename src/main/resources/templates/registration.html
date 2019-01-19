@@ -12,7 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-    <title>Formularz rejestracji</title>
+    <title>SD - Formularz rejestracji</title>
 </head>
 <body>
 <div class="container">
@@ -145,7 +145,8 @@
                            type="checkbox"
                            th:field="*{terms}"/>
                     <label class="control-label" for="terms">
-                        Zapoznałem/-am się z <a href="#">zasadami wyboru przedmiotów</a>.
+                        Zapoznałem/-am się z <a target="_blank" href="/rules">zasadami wyboru przedmiotów</a> oraz
+                        <a target="_blank" href="/description">opisem kierunków</a>.
                     </label>
                     <p class="error-message"
                        th:each="error : ${#fields.errors('terms')}"
