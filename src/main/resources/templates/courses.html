@@ -21,55 +21,7 @@
     <title>Blogen Admin Area</title>
 </head>
 <body>
-<nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse p-0">
-    <div class="container">
-        <button class="navbar-toggler navbar-toggler-right" data-toggle="collapse" data-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a href="index.html" class="navbar-brand mr-3">SD</a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item px-2">
-                    <a href="../" class="nav-link">Koszyk</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link active dropdown-toggle" data-toggle="dropdown">Dodaj przedmiot</a>
-                    <div class="dropdown-menu">
-                        <a href="/../../courses/fielda" class="dropdown-item">kierunkowy</a>
-                        <a href="/../../courses/fieldb" class="dropdown-item">zw. z kierunkiem</a>
-                        <a href="/../../courses/all" class="dropdown-item">dowolny</a>
-                    </div>
-                </li>
-                <li class="nav-item px-2">
-                    <a href="/showlist" class="nav-link">Plan zajęć</a>
-                </li>
-                <li class="nav-item px-2">
-                    <a href="users.html" class="nav-link">Zasady</a>
-                </li>
-            </ul>
-
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown mr-3">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
-                        Welcome Brad</a>
-                    <div class="dropdown-menu">
-                        <a href="profile.html" class="dropdown-item">
-                            <i class="fa fa-user-circle"></i> Profile
-                        </a>
-                        <a href="settings.html" class="dropdown-item">
-                            <i class="fa fa-gear"></i> Settings
-                        </a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a href="/login" class="nav-link">
-                        <i class="fa fa-user-times"></i> Logout
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<div th:insert="/navbar"> </div>
 
 <header id="main-header" class="py-2 bg-success text-white">
     <div class="container">
@@ -135,6 +87,9 @@
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
+    });
+    $(function() {
+        $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
     });
 </script>
 </body>

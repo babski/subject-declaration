@@ -48,8 +48,14 @@ public class UserServiceImpl implements UserService {
                 mapRolesToAuthorities(user.getRoles()));
     }
 
+    @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public User findByPesel(String pesel) {
+        return userRepository.findByPesel(pesel);
     }
 
     @Transactional
@@ -92,7 +98,7 @@ public class UserServiceImpl implements UserService {
                     addedCourse.getStartTime().equals(course.getStartTime())) {
                 throw new CourseCollisionException("Przedmiot " + course.getSubject().getName() +
                         " o sygnaturze " + course.getSubject().getSignature() + " koliduje terminem zajęć" +
-                        " z przedmiotem "+ addedCourse.getSubject().getName() + " o sygnaturze "
+                        " z przedmiotem " + addedCourse.getSubject().getName() + " o sygnaturze "
                         + addedCourse.getSubject().getSignature() + ".");
             }
         }
@@ -126,14 +132,14 @@ public class UserServiceImpl implements UserService {
     public List<Course> getFieldCourses(String login, boolean group1) {
         User user = findByEmail(login);
         List<FieldSubject> allSubjects = user.getField().getFieldSubjects();
-        Set<String> newString = allSubjects.stream()
+        List<String> fieldSignatures = allSubjects.stream()
                 .filter(s -> s.isRequired() == group1)
                 .map(s -> s.getSubject().getSignature())
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
         List<Course> courses = courseService.getAllCourses();
         List<Course> fieldCourses = courses.stream()
-                .filter(s -> newString.contains(s.getSubject().getSignature()))
-                .sorted(Comparator.comparing(s -> s.getSubject().getSignature()))
+                .filter(s -> fieldSignatures.contains(s.getSubject().getSignature()))
+//                .sorted(Comparator.comparing(s -> s.getSubject().getSignature()))
                 .collect(Collectors.toList());
 
         return fieldCourses;
@@ -200,22 +206,23 @@ public class UserServiceImpl implements UserService {
         for (Course course : newBasket) {
             tempMap.put(course.getSubject().getSignature(), course);
         }
-        List<Course> uniqueSet = tempMap.values().stream().collect(Collectors.toList());
+        List<Course> uniqueList = tempMap.values().stream().collect(Collectors.toList());
         List<Course> field = getFieldCourses(login, group1);
 
-        List<Course> common = uniqueSet.stream().filter(course -> field.contains(course))
+        List<Course> common = uniqueList.stream().filter(course -> field.contains(course))
                 .collect(Collectors.toList());
+        double fieldEcts = common.stream().mapToDouble(x -> x.getSubject().getEcts()).sum();
         if (group1) {
-            if (courseService.countEcts(common) < user.getSemester().getField1Ects()) {
+            if (fieldEcts < user.getSemester().getField1Ects()) {
                 throw new FieldCoursesException("Za mało przedmiotów kierunkowych w koszyku. Dodaj " +
                         "jescze przedmioty kierunkowe o wartości przynajmniej " +
-                        (user.getSemester().getField1Ects() - courseService.countEcts(common)) + " ECTS.");
+                        (user.getSemester().getField1Ects() - fieldEcts) + " ECTS.");
             }
         } else {
             if (courseService.countEcts(common) < user.getSemester().getField2Ects()) {
                 throw new FieldCoursesException("Za mało przedmiotów związanych z kierunkiem w koszyku." +
                         " Dodaj jescze przedmioty związane z kierunkiem o wartości przynajmniej " +
-                        (user.getSemester().getField2Ects() - courseService.countEcts(common)) + " ECTS.");
+                        (user.getSemester().getField2Ects() - fieldEcts) + " ECTS.");
             }
         }
     }
@@ -229,8 +236,10 @@ public class UserServiceImpl implements UserService {
                 if (!newBasket.stream()
                         .filter(x -> x.getSubject().getSignature().equals(subject)).findFirst()
                         .isPresent()) {
-                    System.out.println("W koszyku brakuje przedmiotu o sygnaturze " + subject);
-
+                    List<Course> allCourses = courseService.getAllCourses();
+                    throw new CompulsoryCourseException("W koszyku brakuje obowiązkowego przedmiotu " +
+                            courseService.findCoursebySubSignature(subject, allCourses) +
+                            " o sygnaturze " + subject + ".");
                 }
             }
         }
@@ -247,7 +256,6 @@ public class UserServiceImpl implements UserService {
         checkComplexCourses(user);
         user.setBasketAccepted(true);
         userRepository.save(user);
-
     }
 
 

@@ -9,12 +9,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 @ControllerAdvice
-public class ExceptionCotroller {
+public class ExceptionController {
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(RuntimeException.class)
-    public ModelAndView complexNotFound(Exception exception) {
-        log.error("Complex subjects not found");
+    public ModelAndView basketHandler(Exception exception) {
         log.error(exception.getMessage());
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("error");

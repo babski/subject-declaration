@@ -11,6 +11,8 @@ public interface UserService extends UserDetailsService {
 
     User findByEmail(String email);
 
+    User findByPesel(String pesel);
+
     User save(UserRegistrationDto registration);
 
     void addCourse(String login, Long courseId);

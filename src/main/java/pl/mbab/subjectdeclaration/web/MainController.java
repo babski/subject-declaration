@@ -21,7 +21,7 @@ public class MainController {
         this.courseService = courseService;
     }
 
-    @GetMapping("/")
+    @GetMapping({"/","/index"})
     public String root(Authentication authentication, Model model) {
         String login = authentication.getName();
         User user = userService.findByEmail(login);

@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.mbab.subjectdeclaration.model.subject.Course;
 import pl.mbab.subjectdeclaration.model.user.User;
 import pl.mbab.subjectdeclaration.service.CourseService;
@@ -62,13 +63,13 @@ public class CourseController {
         return "fieldb";
     }
 
-    @GetMapping("/showlist")
+    @GetMapping("/schedule")
     public String showList(Authentication authentication, Model model) {
         String login = authentication.getName();
         User user = userService.findByEmail(login);
         Course [][] basket = userService.timetable(login);
         model.addAttribute("basket", basket);
-        return "showlist";
+        return "schedule";
     }
 
     @GetMapping("/description")
@@ -91,11 +92,17 @@ public class CourseController {
     }
 
     @PostMapping("/validate")
-    public String validate(Authentication authentication) {
+    public String postValidation(Authentication authentication,  RedirectAttributes redirectAttributes) {
         String login = authentication.getName();
         log.debug(login);
         userService.validate(login);
-        return "success";
+        redirectAttributes.addFlashAttribute("message", "success");
+        return "redirect:/index";
+    }
+
+    @GetMapping("/validate")
+    public String getValidation() {
+       return "index";
     }
 
     @PostMapping("/deletecourse")

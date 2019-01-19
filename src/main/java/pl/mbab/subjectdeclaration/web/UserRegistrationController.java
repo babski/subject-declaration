@@ -45,9 +45,13 @@ public class UserRegistrationController {
                                       BindingResult result, Model model){
         List<Field> fieldsub = fieldService.getAllFields();
         model.addAttribute("fieldsub", fieldsub);
-        User existing = userService.findByEmail(userDto.getEmail());
-        if (existing != null){
+        User existingEmail = userService.findByEmail(userDto.getEmail());
+        User existingPesel = userService.findByPesel(userDto.getPesel());
+        if (existingEmail != null){
             result.rejectValue("email", null, "Istnieje już konto zarejestrowane na ten adres email");
+        }
+        if (existingPesel != null){
+            result.rejectValue("pesel", null, "Istnieje już konto zarejestrowane na ten nr PESEL");
         }
 
         if (result.hasErrors()){

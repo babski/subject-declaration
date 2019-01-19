@@ -8,4 +8,5 @@ import pl.mbab.subjectdeclaration.model.user.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByEmail(String email);
+    User findByPesel(String pesel);
 }

@@ -65,8 +65,9 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public double countEcts(List<Course> courseSet) {
-        return courseSet.stream().filter(x -> !(x.getSubject().isComplex() == true && x.getType() == CourseType.CLASSES))
+    public double countEcts(List<Course> courseList) {
+        return courseList.stream()
+                .filter(x -> !(x.getSubject().isComplex() == true && x.getType() == CourseType.CLASSES))
                 .mapToDouble(x -> x.getSubject().getEcts()).sum();
 
     }
