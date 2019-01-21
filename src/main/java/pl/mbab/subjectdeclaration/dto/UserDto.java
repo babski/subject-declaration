@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pl.mbab.subjectdeclaration.constraint.EmailConstraint;
 import pl.mbab.subjectdeclaration.constraint.FieldMatch;
 import pl.mbab.subjectdeclaration.constraint.PasswordConstraint;
 import pl.mbab.subjectdeclaration.constraint.PeselConstraint;
@@ -51,7 +52,7 @@ public class UserDto implements UserDetails {
 
     private String confirmPassword;
 
-    @Size(min = 6, message = "Email powinien zawierać przynajmniej 6 znaków")
+    @EmailConstraint
     private String email;
 
     private String confirmEmail;
@@ -60,7 +61,6 @@ public class UserDto implements UserDetails {
     private Boolean terms;
 
     private UserStatus userStatus;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
