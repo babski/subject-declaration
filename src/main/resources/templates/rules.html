@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -11,7 +10,7 @@
     <title>SD - Zasady wyboru przedmiotów</title>
 </head>
 <body>
-<div th:insert="/navbar"> </div>
+<div th:insert="/navbar"></div>
 <header id="main-header" class="py-2 text-white" style="background-color: slateblue">
     <div class="container">
         <div class="row">
@@ -64,9 +63,7 @@
                 </ul>
             </div>
         </div>
-
     </div>
-
     <div id="accordion" role="tablist">
         <div class="card">
             <div class="card-header" role="tab" id="heading">
@@ -93,7 +90,6 @@
                 </div>
             </div>
         </div>
-
         <div class="card">
             <div class="card-header" role="tab" id="heading">
                 <h5 class="mb-0"><a href="#collapse2"
@@ -164,7 +160,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -178,7 +173,7 @@
         integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
         crossorigin="anonymous"></script>
 <script>
-    $(function() {
+    $(function () {
         $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
     });
 </script>

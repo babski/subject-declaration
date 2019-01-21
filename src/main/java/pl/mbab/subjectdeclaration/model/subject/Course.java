@@ -35,5 +35,4 @@ public class Course {
     private LocalTime startTime;
     private LocalTime endTime;
     private String venue;
-
 }

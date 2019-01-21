@@ -28,5 +28,4 @@ public class FieldSubject {
     private Subject subject;
 
     private boolean required;
-
 }

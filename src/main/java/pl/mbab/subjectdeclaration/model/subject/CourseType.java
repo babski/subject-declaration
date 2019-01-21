@@ -1,9 +1,9 @@
 package pl.mbab.subjectdeclaration.model.subject;
 
 public enum CourseType {
-    LECTURE ("wykład"),
+    LECTURE("wykład"),
 
-    CLASSES ("ćwiczenia");
+    CLASSES("ćwiczenia");
 
     private String type;
 

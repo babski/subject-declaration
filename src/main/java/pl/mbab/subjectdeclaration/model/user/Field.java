@@ -23,5 +23,4 @@ public class Field {
     @OneToMany(mappedBy = "field")
     @Column(name = "field_subject_list")
     private List<FieldSubject> fieldSubjects;
-
 }

@@ -24,5 +24,4 @@ public enum DayOfWeek {
     public String getValue() {
         return day;
     }
-
-    }
+}

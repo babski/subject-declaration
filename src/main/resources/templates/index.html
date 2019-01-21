@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="../static/css/style.css" th:href="|@{../css/style.css}|">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
@@ -61,7 +60,6 @@
                         <td th:text="${course.day.getValue() + ' ' + course.startTime + '-' + course.endTime}">Termin
                         </td>
                         <td th:text="${course.subject.isComplex()} and ${course.type == T(pl.mbab.subjectdeclaration.model.subject.CourseType).CLASSES} ? '' : ${course.subject.getEcts()}">
-
                         </td>
                         <td align="center">
                             <span th:if="${!course.lecturer.getSignature().equals('0000')} and ${!user.basketAccepted}"> <form
@@ -147,13 +145,6 @@
         </div>
     </div>
 </div>
-<!--<form th:action="@{/suggest-event}" method="post">-->
-    <!--<button type="submit" class="btn btn-primary">Submit</button>-->
-<!--</form>-->
-<!--<div th:text="${message}" class="alert alert-success">-->
-    <!--<strong>Success!</strong> Operation performed successfully.-->
-<!--</div>-->
-
 <div th:if="${message}">
     <div class="alert alert-info">
         Proces deklaracji przedmiotów zakończony powodzeniem!
@@ -161,19 +152,11 @@
 </div>
 
 <script>
-    //Init tooltips
+
     $('[data-toggle="tooltip"]').tooltip();
     $(function () {
         $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
     });
 </script>
-<!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"-->
-<!--integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="-->
-<!--crossorigin="anonymous"></script>-->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.js"></script>-->
-<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"-->
-<!--integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"-->
-<!--crossorigin="anonymous"></script>-->
-
 </body>
 </html>

@@ -1,6 +1,5 @@
 package pl.mbab.subjectdeclaration.service;
 
-
 import pl.mbab.subjectdeclaration.model.user.Field;
 
 import java.util.List;

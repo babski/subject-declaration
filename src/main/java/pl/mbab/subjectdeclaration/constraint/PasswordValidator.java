@@ -14,7 +14,7 @@ public class PasswordValidator implements
     private static final String PASSWORD_PATTERN =
             "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&]).{6,20})";
 
-    public PasswordValidator(){
+    public PasswordValidator() {
         pattern = Pattern.compile(PASSWORD_PATTERN);
     }
 

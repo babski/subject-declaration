@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.mbab.subjectdeclaration.model.subject.Course;
 import pl.mbab.subjectdeclaration.model.user.User;
 import pl.mbab.subjectdeclaration.service.CourseService;
@@ -29,18 +28,10 @@ public class CourseController {
         this.userService = userService;
     }
 
-    @GetMapping("/profile")
-    public String showProfile(Model model, Authentication authentication) {
-        String login = authentication.getName();
-        User user = userService.findByEmail(login);
-        model.addAttribute("user", user);
-        return "profile";
-    }
-
     @GetMapping("/courses/all")
     public String listCourses(Model model, Authentication authentication) {
-        String login = authentication.getName();
-        User user = userService.findByEmail(login);
+        String email = authentication.getName();
+        User user = userService.findByEmail(email);
         Set<Course> courses = courseService.getAllCourses()
                 .stream().filter(x -> !x.getLecturer().getSignature().equals("0000"))
                 .collect(Collectors.toSet());
@@ -51,10 +42,10 @@ public class CourseController {
 
     @GetMapping("/courses/fielda")
     public String fieldCoursesA(Authentication authentication, Model model) {
-        String login = authentication.getName();
+        String email = authentication.getName();
         boolean group1 = true;
-        User user = userService.findByEmail(login);
-        List<Course> courses = userService.getFieldCourses(login, group1);
+        User user = userService.findByEmail(email);
+        List<Course> courses = courseService.getFieldCourses(email, group1);
         model.addAttribute("courses", courses);
         model.addAttribute("user", user);
         return "fielda";
@@ -62,63 +53,30 @@ public class CourseController {
 
     @GetMapping("/courses/fieldb")
     public String fieldCoursesB(Authentication authentication, Model model) {
-        String login = authentication.getName();
+        String email = authentication.getName();
         boolean group1 = false;
-        User user = userService.findByEmail(login);
-        List<Course> courses = userService.getFieldCourses(login, group1);
+        User user = userService.findByEmail(email);
+        List<Course> courses = courseService.getFieldCourses(email, group1);
         model.addAttribute("courses", courses);
         model.addAttribute("user", user);
         return "fieldb";
     }
 
-    @GetMapping("/schedule")
-    public String showList(Authentication authentication, Model model) {
-        String login = authentication.getName();
-        User user = userService.findByEmail(login);
-        Course [][] basket = userService.timetable(login);
-        model.addAttribute("basket", basket);
-        return "schedule";
-    }
-
-    @GetMapping("/description")
-    public String description() {
-        return "description";
-    }
-
-    @GetMapping("/rules")
-    public String rules() {
-        return "rules";
-    }
-
     @PostMapping("/addcourse")
     public String addCourseById(@RequestParam("courseId") String courseId, Authentication authentication) {
-        String login = authentication.getName();
-        log.debug(login);
+        String email = authentication.getName();
+        log.debug(email);
         Long id = Long.parseLong(courseId);
-        userService.addCourse(login, id);
+        courseService.addCourse(email, id);
         return "redirect:/";
-    }
-
-    @PostMapping("/validate")
-    public String postValidation(Authentication authentication,  RedirectAttributes redirectAttributes) {
-        String login = authentication.getName();
-        log.debug(login);
-        userService.validate(login);
-        redirectAttributes.addFlashAttribute("message", "success");
-        return "redirect:/index";
-    }
-
-    @GetMapping("/validate")
-    public String getValidation() {
-       return "index";
     }
 
     @PostMapping("/deletecourse")
     public String deleteCourseById(@RequestParam("courseId") String courseId, Authentication authentication) {
-        String login = authentication.getName();
-        log.debug(login);
+        String email = authentication.getName();
+        log.debug(email);
         Long id = Long.parseLong(courseId);
-        userService.deleteCourse(login, id);
+        courseService.deleteCourse(email, id);
         return "redirect:/";
     }
 }

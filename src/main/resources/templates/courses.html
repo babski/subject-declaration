@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="../static/css/style.css" th:href="|@{../css/style.css}|">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
@@ -21,7 +20,7 @@
     <title>SD - Dodaj dowolny przedmiot</title>
 </head>
 <body>
-<div th:insert="/navbar"> </div>
+<div th:insert="/navbar"></div>
 
 <header id="main-header" class="py-2 bg-success text-white">
     <div class="container">
@@ -73,7 +72,7 @@
                             </span>
                         </td>
                     </tr>
-                                        </tbody>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -88,76 +87,9 @@
             });
         });
     });
-    $(function() {
+    $(function () {
         $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
     });
 </script>
 </body>
 </html>
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="pl" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--<meta charset="UTF-8">-->
-<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">-->
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>-->
-<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>-->
-<!--<title>Filterable table</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<a href th:href="@{/}">Strona główna</a>-->
-<!--<a href th:href="@{/courses/field1}">Dodaj kierunkowy</a>-->
-<!--<a href th:href="@{/courses/field2b}">Dodaj związany z kierunkiem</a>-->
-<!--<div class="container mt-3">-->
-<!--<h2>Filterable Table</h2>-->
-<!--<p>Type something in the input field to search the table for first names, last names or emails:</p>-->
-<!--<input class="form-control" id="myInput" type="text" placeholder="Search..">-->
-<!--<br>-->
-<!--<table class="table table-bordered">-->
-<!--<thead>-->
-<!--<tr>-->
-<!--<th>Sygnatura</th>-->
-<!--<th>Przedmiot</th>-->
-<!--<th>Typ zajęć</th>-->
-<!--<th>Wykładowca</th>-->
-<!--<th>Termin</th>-->
-<!--<th>Dodaj</th>-->
-<!--</tr>-->
-<!--</thead>-->
-<!--<tbody id="myTable">-->
-<!--<tr th:each="course: ${courses}">-->
-<!--<td th:text="${course.subject.getSignature() +'-'+course.lecturer.getSignature()}"></td>-->
-<!--<td th:text="${course.subject.getName()}"></td>-->
-<!--<td th:text="${course.type.getValue()}"></td>-->
-<!--<td th:text="${course.lecturer.getName()}"></td>-->
-<!--<td th:text="${course.day.getValue() + ' ' + course.startTime + '-' + course.endTime}"></td>-->
-<!--<td>-->
-<!--<form action="#" th:action="@{'/addcourse/'}" th:object="${course}" method="post">-->
-<!--<input type="hidden" id="courseId" name="courseId" th:value="${course.id}"/>-->
-<!--<input type="submit" value="Dodaj"/>-->
-<!--</form>-->
-<!--</td>-->
-
-<!--</tr>-->
-<!--</tbody>-->
-<!--</table>-->
-
-<!--<p>Note that we start the search in tbody, to prevent filtering the table headers.</p>-->
-<!--</div>-->
-
-<!--<script>-->
-<!--$(document).ready(function () {-->
-<!--$("#myInput").on("keyup", function () {-->
-<!--var value = $(this).val().toLowerCase();-->
-<!--$("#myTable tr").filter(function () {-->
-<!--$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)-->
-<!--});-->
-<!--});-->
-<!--});-->
-<!--</script>-->
-
-<!--</body>-->
-<!--</html>-->

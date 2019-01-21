@@ -1,32 +1,24 @@
 package pl.mbab.subjectdeclaration.service;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
+import pl.mbab.subjectdeclaration.dto.UserDto;
 import pl.mbab.subjectdeclaration.model.subject.Course;
 import pl.mbab.subjectdeclaration.model.user.User;
-import pl.mbab.subjectdeclaration.web.dto.UserRegistrationDto;
 
-import java.util.List;
-
-public interface UserService extends UserDetailsService {
+public interface UserService {
 
     User findByEmail(String email);
 
     User findByPesel(String pesel);
 
-    User save(UserRegistrationDto registration);
+    User save(UserDto userDto);
 
-    void addCourse(String login, Long courseId);
+    Course[][] timetable(String email);
 
-    void deleteCourse(String login, Long courseId);
+    void sendActivationMail(User user);
 
-    List<Course> showBasket(String login);
+    boolean activateUser(String email, String token);
+
+    boolean authenticate(String email, String password);
 
     void addCompulsoryCourse(User user);
-
-    List<Course> getFieldCourses(String login, boolean group1);
-
-    Course[][] timetable(String login);
-
-    void validate(String login);
-
 }

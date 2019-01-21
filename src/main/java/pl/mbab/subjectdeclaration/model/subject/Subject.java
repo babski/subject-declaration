@@ -22,6 +22,4 @@ public class Subject {
     private String name;
     private double ects;
     private boolean complex;
-
-
 }
