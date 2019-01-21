@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Aktywacja konta</title>
+    </head>
+
+<body>
+<h2>Gratulacje!</h2>
+
+<th:if test="${not empty message}">
+    <div th:text="${message}"></div>
+</th:if>
+<p>Kliknij <a href="/login">tutaj</a>, aby się zalogować.</p>
+
+</body>
+</html>
