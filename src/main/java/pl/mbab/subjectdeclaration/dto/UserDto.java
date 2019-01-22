@@ -40,7 +40,7 @@ public class UserDto implements UserDetails {
     @PeselConstraint
     private String pesel;
 
-    @NotNull(message = "Proszę wybrać płeć biologiczną")
+    @NotNull(message = "Proszę wybrać płeć")
     private Gender gender;
 
     private Semester semester;

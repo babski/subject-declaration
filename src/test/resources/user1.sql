@@ -1,0 +1,1 @@
+INSERT INTO user (basket_accepted, email, field_id, first_name, gender, last_name, password, pesel, semester, token, user_status, id) VALUES (0, 'adam@wp.pl', 1, 'Adam', 'MALE', 'Nowak', 'Poiuytrewq!2', '90062810103', 'II', 'da7192dhsakda', 0, 9)
