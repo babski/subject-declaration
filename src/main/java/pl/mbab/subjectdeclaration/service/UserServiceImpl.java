@@ -12,7 +12,6 @@ import pl.mbab.subjectdeclaration.repository.CourseRepository;
 import pl.mbab.subjectdeclaration.repository.UserRepository;
 
 import java.time.LocalTime;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -20,13 +19,9 @@ import java.util.Locale;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
-
     private UserConverter userConverter;
-
     private EmailService emailService;
-
     private MessageSource messageSource;
-
     private CourseRepository courseRepository;
 
     public UserServiceImpl(UserRepository userRepository, UserConverter userConverter,
@@ -76,7 +71,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean activateUser(String pesel, String token) {
-        System.out.println("start method");
         User user = userRepository.findOneByPeselAndToken(pesel, token);
         if (user != null && UserStatus.NEW.equals(user.getUserStatus())) {
             user.setUserStatus(UserStatus.ACTIVATED);
@@ -92,19 +86,19 @@ public class UserServiceImpl implements UserService {
                 (email, password, UserStatus.ACTIVATED) != null ? true : false;
     }
 
-    public Course[][] timetable(String login) {
-        User user = findByEmail(login);
+    @Override
+    public Course[][] timetable(String email) {
+        User user = findByEmail(email);
         List<Course> basket = user.getCourseBasket();
         Course[][] coursesInBasket = new Course[7][5];
         for (Course singleCourse : basket) {
-            coursesInBasket[parser(singleCourse.getStartTime())]
+            coursesInBasket[timeParser(singleCourse.getStartTime())]
                     [singleCourse.getDay().ordinal()] = singleCourse;
         }
-        System.out.println(Arrays.deepToString(coursesInBasket));
         return coursesInBasket;
     }
 
-    public static int parser(LocalTime localTime) {
+    public static int timeParser(LocalTime localTime) {
         for (int i = 0; i < 7; i++) {
             if (localTime.equals(LocalTime.of(8, 00, 00).plusMinutes(110 * i)))
                 return i;

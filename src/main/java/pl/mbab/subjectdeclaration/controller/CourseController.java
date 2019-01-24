@@ -29,7 +29,7 @@ public class CourseController {
     }
 
     @GetMapping("/courses/all")
-    public String listCourses(Model model, Authentication authentication) {
+    public String listAllCourses(Model model, Authentication authentication) {
         String email = authentication.getName();
         User user = userService.findByEmail(email);
         Set<Course> courses = courseService.getAllCourses()
@@ -41,7 +41,7 @@ public class CourseController {
     }
 
     @GetMapping("/courses/fielda")
-    public String fieldCoursesA(Authentication authentication, Model model) {
+    public String listFieldCoursesA(Authentication authentication, Model model) {
         String email = authentication.getName();
         boolean group1 = true;
         User user = userService.findByEmail(email);
@@ -52,7 +52,7 @@ public class CourseController {
     }
 
     @GetMapping("/courses/fieldb")
-    public String fieldCoursesB(Authentication authentication, Model model) {
+    public String listFieldCoursesB(Authentication authentication, Model model) {
         String email = authentication.getName();
         boolean group1 = false;
         User user = userService.findByEmail(email);

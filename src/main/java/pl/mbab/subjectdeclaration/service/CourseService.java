@@ -1,7 +1,6 @@
 package pl.mbab.subjectdeclaration.service;
 
 import pl.mbab.subjectdeclaration.model.subject.Course;
-import pl.mbab.subjectdeclaration.model.user.User;
 
 import java.util.List;
 
@@ -21,7 +20,5 @@ public interface CourseService {
 
     void deleteCourse(String email, Long courseId);
 
-    void addCompulsoryCourse(User user);
-
-    void validate(String email);
+    boolean validate(String email);
 }

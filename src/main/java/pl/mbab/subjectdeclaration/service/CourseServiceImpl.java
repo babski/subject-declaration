@@ -9,6 +9,7 @@ import pl.mbab.subjectdeclaration.model.subject.FieldSubject;
 import pl.mbab.subjectdeclaration.model.user.Semester;
 import pl.mbab.subjectdeclaration.model.user.User;
 import pl.mbab.subjectdeclaration.repository.CourseRepository;
+import pl.mbab.subjectdeclaration.repository.FieldRepository;
 import pl.mbab.subjectdeclaration.repository.UserRepository;
 
 import java.util.*;
@@ -20,9 +21,10 @@ public class CourseServiceImpl implements CourseService {
     private CourseRepository courseRepository;
     private UserService userService;
     private UserRepository userRepository;
+    private FieldRepository fieldRepository;
 
     public CourseServiceImpl(CourseRepository courseRepository, UserService userService,
-                             UserRepository userRepository) {
+                             UserRepository userRepository, FieldRepository fieldRepository) {
         this.courseRepository = courseRepository;
         this.userService = userService;
         this.userRepository = userRepository;
@@ -56,10 +58,11 @@ public class CourseServiceImpl implements CourseService {
         }
         throw new RuntimeException("Nie istnieje przedmiot o wskazanej sygnataurze.");
     }
+
     @Override
     @Transactional
-    public void addCourse(String login, Long courseId) {
-        User user = userService.findByEmail(login);
+    public void addCourse(String email, Long courseId) {
+        User user = userService.findByEmail(email);
         Course course = findCourseById(courseId);
         List<Course> addedCourses = user.getCourseBasket();
         for (Course addedCourse : addedCourses) {
@@ -82,24 +85,16 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     @Transactional
-    public void deleteCourse(String login, Long courseId) {
-        User user =userService.findByEmail(login);
+    public void deleteCourse(String email, Long courseId) {
+        User user = userService.findByEmail(email);
         Course course = findCourseById(courseId);
         List<Course> userCourses = user.getCourseBasket();
         userCourses.remove(course);
     }
 
     @Override
-    @Transactional
-    public void addCompulsoryCourse(User user) {
-        List<Course> userCourses = user.getCourseBasket();
-        userCourses.add(courseRepository.findById(Long.valueOf(user.getSemester().ordinal() + 1))
-                .orElse(null));
-    }
-
-    @Override
-    public List<Course> getFieldCourses(String login, boolean group1) {
-        User user = userService.findByEmail(login);
+    public List<Course> getFieldCourses(String email, boolean group1) {
+        User user = userService.findByEmail(email);
         List<FieldSubject> allSubjects = user.getField().getFieldSubjects();
         List<String> fieldSignatures = allSubjects.stream()
                 .filter(s -> s.isRequired() == group1)
@@ -113,7 +108,7 @@ public class CourseServiceImpl implements CourseService {
         return fieldCourses;
     }
 
-    public void checkEcts(User user) {
+    public boolean checkEcts(User user) {
         List<Course> basket = user.getCourseBasket();
         double ectsInBasket = countEcts(basket);
         if (ectsInBasket < Semester.ectsMin) {
@@ -126,9 +121,10 @@ public class CourseServiceImpl implements CourseService {
                     "przedmioty o wartości co najmniej " + (ectsInBasket - Semester.ectsMax) +
                     " pkt ECTS");
         }
+        return true;
     }
 
-    public void checkComplexCourses(User user) {
+    public boolean checkComplexCourses(User user) {
         List<Course> basket = user.getCourseBasket();
         Set<Course> newBasket = new HashSet<>(basket);
 
@@ -146,10 +142,11 @@ public class CourseServiceImpl implements CourseService {
                         " o sygnaturze " + signature + " nie dodano wykładu/ćwiczeń");
             }
         }
+        return true;
     }
 
-    public void checkFieldCourses(User user, boolean group1) {
-        String login = user.getEmail();
+    public boolean checkFieldCourses(User user, boolean group1) {
+        String email = user.getEmail();
         List<Course> basket = user.getCourseBasket();
         List<Course> newBasket = new ArrayList<>(basket);
         Map<String, Course> tempMap = new HashMap<>();
@@ -157,7 +154,7 @@ public class CourseServiceImpl implements CourseService {
             tempMap.put(course.getSubject().getSignature(), course);
         }
         List<Course> uniqueList = tempMap.values().stream().collect(Collectors.toList());
-        List<Course> field = getFieldCourses(login, group1);
+        List<Course> field = getFieldCourses(email, group1);
 
         List<Course> common = uniqueList.stream().filter(course -> field.contains(course))
                 .collect(Collectors.toList());
@@ -165,19 +162,20 @@ public class CourseServiceImpl implements CourseService {
         if (group1) {
             if (fieldEcts < user.getSemester().getField1Ects()) {
                 throw new FieldCoursesException("Za mało przedmiotów kierunkowych w koszyku. Dodaj " +
-                        "jescze przedmioty kierunkowe o wartości przynajmniej " +
+                        "jeszcze przedmioty kierunkowe o wartości przynajmniej " +
                         (user.getSemester().getField1Ects() - fieldEcts) + " ECTS.");
             }
         } else {
             if (countEcts(common) < user.getSemester().getField2Ects()) {
                 throw new FieldCoursesException("Za mało przedmiotów związanych z kierunkiem w " +
-                        "koszyku. Dodaj jescze przedmioty związane z kierunkiem o wartości " +
+                        "koszyku. Dodaj jeszcze przedmioty związane z kierunkiem o wartości " +
                         "przynajmniej " + (user.getSemester().getField2Ects() - fieldEcts) + " ECTS.");
             }
         }
+        return true;
     }
 
-    public void checkCompulsoryCourses(User user) {
+    public boolean checkCompulsoryCourses(User user) {
         List<Course> basket = user.getCourseBasket();
         List<Course> newBasket = new ArrayList<>(basket);
         if (user.getSemester().getCompulsorySubjects() != null) {
@@ -193,12 +191,13 @@ public class CourseServiceImpl implements CourseService {
                 }
             }
         }
+        return true;
     }
 
     @Override
     @Transactional
-    public void validate(String login) {
-        User user = userService.findByEmail(login);
+    public boolean validate(String email) {
+        User user = userService.findByEmail(email);
         checkEcts(user);
         checkFieldCourses(user, true);
         checkFieldCourses(user, false);
@@ -206,5 +205,7 @@ public class CourseServiceImpl implements CourseService {
         checkComplexCourses(user);
         user.setBasketAccepted(true);
         userRepository.save(user);
+
+        return true;
     }
 }
