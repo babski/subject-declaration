@@ -1,8 +1,8 @@
 package pl.mbab.subjectdeclaration.service;
 
-import pl.mbab.subjectdeclaration.dto.UserDto;
 import pl.mbab.subjectdeclaration.model.subject.Course;
 import pl.mbab.subjectdeclaration.model.user.User;
+import pl.mbab.subjectdeclaration.user.register.UserDto;
 
 public interface UserService {
 

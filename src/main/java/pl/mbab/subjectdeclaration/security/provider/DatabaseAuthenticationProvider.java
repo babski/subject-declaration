@@ -15,8 +15,8 @@ import pl.mbab.subjectdeclaration.service.UserService;
 @Component
 public class DatabaseAuthenticationProvider implements AuthenticationProvider {
 
-    private UserService userService;
-    private UserDetailsService userDetailsService;
+    private final UserService userService;
+    private final UserDetailsService userDetailsService;
 
     @Autowired
     public DatabaseAuthenticationProvider(@Qualifier("userInfoServiceImpl") UserDetailsService userDetailsService, UserService userService) {
@@ -27,7 +27,6 @@ public class DatabaseAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String email = authentication.getName();
-        System.out.println(email);
         String password = DigestUtils.md5Hex(authentication.getCredentials().toString());
         if (userService.authenticate(email, password)) {
             UserDetails user = userDetailsService.loadUserByUsername(email);

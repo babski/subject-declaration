@@ -4,12 +4,12 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.mbab.subjectdeclaration.converter.UserConverter;
-import pl.mbab.subjectdeclaration.dto.UserDto;
 import pl.mbab.subjectdeclaration.model.subject.Course;
 import pl.mbab.subjectdeclaration.model.user.User;
 import pl.mbab.subjectdeclaration.model.user.UserStatus;
 import pl.mbab.subjectdeclaration.repository.CourseRepository;
 import pl.mbab.subjectdeclaration.repository.UserRepository;
+import pl.mbab.subjectdeclaration.user.register.UserDto;
 
 import java.time.LocalTime;
 import java.util.List;

@@ -2,10 +2,10 @@ package pl.mbab.subjectdeclaration.converter;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Component;
-import pl.mbab.subjectdeclaration.dto.UserDto;
 import pl.mbab.subjectdeclaration.model.user.Role;
 import pl.mbab.subjectdeclaration.model.user.User;
 import pl.mbab.subjectdeclaration.model.user.UserStatus;
+import pl.mbab.subjectdeclaration.user.register.UserDto;
 
 import java.util.Arrays;
 import java.util.UUID;

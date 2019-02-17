@@ -12,6 +12,5 @@ public class SubjectDeclarationApplicationTests {
     @Test
     public void contextLoads() {
     }
-
 }
 

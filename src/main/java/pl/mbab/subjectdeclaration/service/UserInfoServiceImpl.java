@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.mbab.subjectdeclaration.converter.UserConverter;
-import pl.mbab.subjectdeclaration.dto.UserDto;
 import pl.mbab.subjectdeclaration.repository.UserRepository;
+import pl.mbab.subjectdeclaration.user.register.UserDto;
 
 import java.util.Objects;
 

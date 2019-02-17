@@ -1,43 +1,43 @@
-package pl.mbab.subjectdeclaration.dto;
+package pl.mbab.subjectdeclaration.user.register;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.pl.PESEL;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import pl.mbab.subjectdeclaration.constraint.EmailConstraint;
 import pl.mbab.subjectdeclaration.constraint.FieldMatch;
 import pl.mbab.subjectdeclaration.constraint.PasswordConstraint;
-import pl.mbab.subjectdeclaration.constraint.PeselConstraint;
 import pl.mbab.subjectdeclaration.model.user.Field;
 import pl.mbab.subjectdeclaration.model.user.Gender;
 import pl.mbab.subjectdeclaration.model.user.Semester;
 import pl.mbab.subjectdeclaration.model.user.UserStatus;
 
 import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Collection;
-
 @FieldMatch.List({
         @FieldMatch(first = "password", second = "confirmPassword", message = "Pola haseł powinny do siebie pasować"),
         @FieldMatch(first = "email", second = "confirmEmail", message = "Pola email powinny do siebie pasować")
 })
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder(toBuilder = true)
 public class UserDto implements UserDetails {
 
     private Long id;
-    @Size(min = 3, max = 20, message = "Imię powinno zawierać od 3 do 20 znaków")
+
+    @Length(min = 3, max = 20, message = "Imię powinno zawierać od 3 do 20 znaków")
     private String firstName;
 
-    @Size(min = 3, max = 40, message = "Nazwisko powinno zawierać od 3 do 40 znaków")
+    @Length(min = 3, max = 40, message = "Nazwisko powinno zawierać od 3 do 40 znaków")
     private String lastName;
 
-    @PeselConstraint
+    @PESEL
     private String pesel;
 
     @NotNull(message = "Proszę wybrać płeć")
@@ -52,7 +52,7 @@ public class UserDto implements UserDetails {
 
     private String confirmPassword;
 
-    @EmailConstraint
+    @Email
     private String email;
 
     private String confirmEmail;
